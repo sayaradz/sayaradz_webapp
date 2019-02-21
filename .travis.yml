@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - v6
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-4.8
+      - g++-4.8
+script:
+  - npm start
+env:
+  global:
+    - CXX=g++-4.8
+    - SENDGRID_KEY=sendgridKey
+    - MASTER_KEY=masterKey
+    - JWT_SECRET=jwtSecret
+deploy:
+  provider: heroku
+  api_key:
+    secure: LZhy7albutlALlY1PLeU3f7vAbEnFTbA5Gz8Elxb8ujMA18wMx0UYzAv0xGmv86TmlbPtDll8F2+IvJBDihKYQrbNubFNkJ5d816ETrhyxikaoep4ka+R4Xqe3WrW26Ss+07AcDpvsQ3kH4WZZI+jGj4Ig5nSaZwq/7+I8wjTV12BBZt9LieeR0nPJ8bdkh8m/j/gZsysyDGXTbppXpg5CxNUsoyevv5AmF1QpxNIsddzPIKIxysgCSf+eV8eboPrwEGAlADH8wjA7RPdTsVX1eRtcTlp77cY6LEBv6g2ToxXCb6hS/Wg4f+lSQ68k8KIgwAgXOqQ/NLQqrLgXh4nEgXtnT19kVeWwB/mpksfwT/cWuz5xun3ByuIFpSyEAYieJca03MvqWh/4i/yyyQ3r9GvdN9awyaKK5rMbJQt2/LxD8A3j/Hhp5jrZZbXuVZhTWiA6Ek0StMUBoaXPItpvgO8vum+8wJ9DXtRRA80CZ3OjTO84UASvUXfjmy8CEQA/LcM+CxYD6e9bcvbp3V/oFkQ7vNojhPG58x0UCYqVRc99JTnwoVFVf7DLid8GCMGztW6gGumTFwpdazbZyolho+rwtlaH+1mRTS2zpqjO2uqhfJm7SJ+k0t7FNnoh2cvqP1Mndw2vrqcI3w79wRzFtxGtSR5B25f4AquvtQ/TY=
+  app: sayaradz-webapp
