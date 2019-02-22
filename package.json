@@ -7,10 +7,6 @@
   "copyright": "Copyright 2018 creativeLabs Łukasz Holeczek",
   "license": "MIT",
   "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:coreui/coreui-free-react-admin-template.git"
-  },
   "dependencies": {
     "@coreui/coreui": "^2.1.5",
     "@coreui/coreui-plugin-chartjs-custom-tooltips": "^1.2.0",
