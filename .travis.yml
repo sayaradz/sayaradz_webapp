@@ -1,20 +1,20 @@
 language: node_js
 node_js:
-  - v10
+- v10
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - gcc-4.8
-      - g++-4.8
+    - gcc-4.8
+    - g++-4.8
 script:
-  - npm run build
+- npm run build
 env:
   global:
-    - CXX=g++-4.8
+  - CXX=g++-4.8
 deploy:
   provider: heroku
   api_key:
-    secure: LZhy7albutlALlY1PLeU3f7vAbEnFTbA5Gz8Elxb8ujMA18wMx0UYzAv0xGmv86TmlbPtDll8F2+IvJBDihKYQrbNubFNkJ5d816ETrhyxikaoep4ka+R4Xqe3WrW26Ss+07AcDpvsQ3kH4WZZI+jGj4Ig5nSaZwq/7+I8wjTV12BBZt9LieeR0nPJ8bdkh8m/j/gZsysyDGXTbppXpg5CxNUsoyevv5AmF1QpxNIsddzPIKIxysgCSf+eV8eboPrwEGAlADH8wjA7RPdTsVX1eRtcTlp77cY6LEBv6g2ToxXCb6hS/Wg4f+lSQ68k8KIgwAgXOqQ/NLQqrLgXh4nEgXtnT19kVeWwB/mpksfwT/cWuz5xun3ByuIFpSyEAYieJca03MvqWh/4i/yyyQ3r9GvdN9awyaKK5rMbJQt2/LxD8A3j/Hhp5jrZZbXuVZhTWiA6Ek0StMUBoaXPItpvgO8vum+8wJ9DXtRRA80CZ3OjTO84UASvUXfjmy8CEQA/LcM+CxYD6e9bcvbp3V/oFkQ7vNojhPG58x0UCYqVRc99JTnwoVFVf7DLid8GCMGztW6gGumTFwpdazbZyolho+rwtlaH+1mRTS2zpqjO2uqhfJm7SJ+k0t7FNnoh2cvqP1Mndw2vrqcI3w79wRzFtxGtSR5B25f4AquvtQ/TY=
+    secure: Z5rGwBfZsInbtHed0I+pqzM2h0CrSEXdzE9UViZ5iXfsJG6MwaVEX3KIxKdMe9ei5tnHk9+8+T1Rj5cw+gS0NHivh0cyZ2LzoDR1+87uPWk7jrNCHPMc7cdryDMJQ6weEvPe9JfzDK/ju6LdnQ4GMsYSGz1BWxza100hp5VCVA8S2tF7frqtlnD4azyBOpLSkhcn02GCzIsTQu0SvYxTQWYfTb5GpzXuvI7XvVX/i3K7Qf5UGKo0zPMQeOUp1Go3hWTIiGE4rcXPqvrfoqfnfNohx5ls8haYRmhp0DSXMz1Hx+Gjuo5SwZqYvj47+7wzr/wAnjvwTPl5t64E70eK/hci3bYk13jCNQc1rpGjr/jzz40rEGraMSXYNKFSQMXYqeGkgasf1I/4iDUNH7tQryHygXVzZuAt16cOARTflbl6QHyzZ+lR8Hl/JNJlTNOQJK3ynt2YDYveo+zJfRVsKp8YJd3g0sf1nNHaBQHmXzGYXH8ShNtq27vvtzQwUBhAhVn0/FgvO0UudryIvEzBSkQUui4CcE6El1tBgpaUkNlfCPw/fA3DQU2lR/8GmbogyEijX37vMKZi4aT41hlEPfbniGX3u9mNkr5CjXtrIqXnORYEQryePPT0pgFg4Zom4gJB/ZIe1amLPBZz7QTSM3klrwna9R6n8lwfWEjhZaQ=
   app: sayaradz-webapp
