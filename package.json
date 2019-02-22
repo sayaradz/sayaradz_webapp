@@ -18,9 +18,11 @@
     "core-js": "^2.6.1",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
+    "express": "^4.16.4",
     "flag-icon-css": "^3.2.1",
     "font-awesome": "^4.7.0",
     "node-sass": "^4.11.0",
+    "path": "^0.12.7",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-app-polyfill": "^0.2.0",
@@ -31,7 +33,6 @@
     "react-router-dom": "^4.3.1",
     "react-test-renderer": "^16.7.0",
     "reactstrap": "^7.0.2",
-    "serve": "^10.1.2",
     "simple-line-icons": "^2.4.1"
   },
   "devDependencies": {
@@ -40,6 +41,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "prod": "node index.js",
     "test": "react-scripts test",
     "test:cov": "react-scripts test --coverage",
     "test:debug": "react-scripts --inspect-brk test --runInBand",

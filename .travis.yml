@@ -10,7 +10,7 @@ addons:
       - g++-4.8
 script:
   - npm run build
-  - serve -s build
+  - npm run prod
 env:
   global:
     - CXX=g++-4.8
