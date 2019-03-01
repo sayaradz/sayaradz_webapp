@@ -11,65 +11,17 @@ export default {
     },
     {
       title: true,
-      name: 'Admin',
+      name: 'Gestion CRUD',
     },
     {
-      name: 'Pages',
-      url: '/pages',
+      name: 'Fabricants',
+      url: '/fabricants',
       icon: 'icon-pencil',
-      children: [
-        {
-          name: 'Login',
-          url: '/login',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Register',
-          url: '/register',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 404',
-          url: '/404',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 500',
-          url: '/500',
-          icon: 'icon-star',
-        },
-      ],
     },
     {
-      title: true,
-      name: 'Fabricant',
-    },
-    {
-      name: 'Pages',
-      url: '/pages',
+      name: 'Utilisateurs',
+      url: '/users',
       icon: 'icon-pencil',
-      children: [
-        {
-          name: 'Login',
-          url: '/login',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Register',
-          url: '/register',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 404',
-          url: '/404',
-          icon: 'icon-star',
-        },
-        {
-          name: 'Error 500',
-          url: '/500',
-          icon: 'icon-star',
-        },
-      ],
     },
 
   ],
