@@ -40,8 +40,8 @@
   },
   "scripts": {
     "start": "node index.js",
-    "run dev": "react-scripts start",
-    "heroku-postbuild": "npm install && npm run build",
+    "dev": "react-scripts start",
+    "heroku-postbuild": "npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:cov": "react-scripts test --coverage",
