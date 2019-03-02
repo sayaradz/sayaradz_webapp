@@ -46,11 +46,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "react-scripts start",
-<<<<<<< HEAD
     "heroku-postbuild": "npm run build",
-=======
-    "heroku-postbuild": "npm install && npm run build",
->>>>>>> b6a29a3068d271d0047383789ec1c83d0e6069c2
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:cov": "react-scripts test --coverage",
