@@ -39,7 +39,7 @@ class Users extends Component {
           <Col xl={6}>
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i> Users <small className="text-muted">example</small>
+                <i className="fa fa-align-justify"></i> Utilisateurs
               </CardHeader>
               <CardBody>
                 <Table responsive hover>
@@ -54,7 +54,7 @@ class Users extends Component {
                   </thead>
                   <tbody>
                     {userList.map((user, index) =>
-                      <UserRow key={index} user={user}/>
+                      <UserRow key={index} user={user} />
                     )}
                   </tbody>
                 </Table>

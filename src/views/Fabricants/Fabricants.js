@@ -1,70 +1,93 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Badge, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import Spinner from '../common/Spinner';
+import FabricantModal from './FabricantModal.js';
+import { getFabricants, deleteFabricant } from '../../actions/fabricantActions';
+import axios from 'axios';
 
-import usersData from './UsersData'
-
-function UserRow(props) {
-  const user = props.user
-  const userLink = `/users/${user.id}`
-
-  const getBadge = (status) => {
-    return status === 'Active' ? 'success' :
-      status === 'Inactive' ? 'secondary' :
-        status === 'Pending' ? 'warning' :
-          status === 'Banned' ? 'danger' :
-            'primary'
-  }
-
+function FabricantRow(props) {
+  const fabricant = props.fabricant;
+  const id = props.id;
   return (
-    <tr key={user.id.toString()}>
-      <th scope="row"><Link to={userLink}>{user.id}</Link></th>
-      <td><Link to={userLink}>{user.name}</Link></td>
-      <td>{user.registered}</td>
-      <td>{user.role}</td>
-      <td><Link to={userLink}><Badge color={getBadge(user.status)}>{user.status}</Badge></Link></td>
+    <tr key={fabricant._id.toString()}>
+      <th scope="row">{id}</th>
+      <td>{fabricant.name}</td>
+      <td>
+        <Button className="float-left mr-1" color="danger" onClick={() => props.handleDelete(fabricant._id)}>&#10006;</Button>
+        <FabricantModal id={fabricant._id} name={fabricant.name} btnColor="warning" btnText="&#9998;"></FabricantModal>
+      </td>
+
     </tr>
   )
 }
 
 class Fabricants extends Component {
+  componentDidMount() {
+    this.props.getFabricants();
+  }
 
   render() {
-
-    const userList = usersData.filter((user) => user.id < 10)
-
-    return (
-      <div className="animated fadeIn">
-        <Row>
-          <Col xl={6}>
-            <Card>
-              <CardHeader>
-                <i className="fa fa-align-justify"></i> Users <small className="text-muted">example</small>
-              </CardHeader>
-              <CardBody>
-                <Table responsive hover>
-                  <thead>
-                    <tr>
-                      <th scope="col">id</th>
-                      <th scope="col">name</th>
-                      <th scope="col">registered</th>
-                      <th scope="col">role</th>
-                      <th scope="col">status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {userList.map((user, index) =>
-                      <UserRow key={index} user={user}/>
-                    )}
-                  </tbody>
-                </Table>
-              </CardBody>
-            </Card>
+    const { fabricants, loading } = this.props.fabricant;
+    if (fabricants === null || loading) {
+      return (
+        <div className="animated fadeIn">
+          <Row>
+            <Col xl={6}>
+              <Spinner />;
           </Col>
-        </Row>
-      </div>
-    )
+          </Row>
+        </div>
+      )
+    } else {
+      let count = 1;
+      return (
+        <div className="animated fadeIn">
+          <Row>
+            <Col xl={6}>
+              <Card>
+                <CardHeader>
+                  <i className="fa fa-align-justify"></i> Fabricants
+                </CardHeader>
+                <CardBody>
+                  <Table responsive hover>
+                    <thead>
+                      <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">name</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        fabricants.map(fabricant =>
+                          <FabricantRow fabricant={fabricant} id={count++}
+                            handleDelete={this.props.deleteFabricant} />
+                        )}
+                    </tbody>
+                  </Table>
+                </CardBody>
+              </Card>
+              <FabricantModal id="" name="" btnColor="primary" btnText="Ajouter"></FabricantModal>
+              <br /><br />
+            </Col>
+          </Row>
+        </div>
+      )
+    }
   }
 }
 
-export default Fabricants;
+Fabricants.propTypes = {
+  getFabricants: PropTypes.func.isRequired,
+  deleteFabricant: PropTypes.func.isRequired,
+  fabricant: PropTypes.object
+};
+
+const mapStateToProps = state => ({
+  fabricant: state.fabricant
+});
+
+export default connect(mapStateToProps, { getFabricants, deleteFabricant })(Fabricants);
