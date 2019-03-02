@@ -72,6 +72,5 @@
       "!src/serviceWorker.js",
       "!src/polyfill.js"
     ]
-  },
-  "proxy": "https://sayaradz-backend.herokuapp.com"
+  }
 }

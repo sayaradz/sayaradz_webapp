@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'axios'
 
 import {
   ADD_FABRICANT,
@@ -8,13 +8,13 @@ import {
   GET_FABRICANT,
   DELETE_FABRICANT,
   FABRICANT_LOADING
-} from './types';
+} from './types'
 
 // Add Fabricant
 export const addFabricant = fabData => dispatch => {
-  dispatch(clearErrors());
+  dispatch(clearErrors())
   axios
-    .post('/manufacturers', fabData)
+    .post(`${process.env.REACT_APP_BACKEND_URL}/manufacturers`, fabData)
     .then(res =>
       dispatch({
         type: ADD_FABRICANT,
@@ -26,14 +26,14 @@ export const addFabricant = fabData => dispatch => {
         type: GET_ERRORS,
         payload: err.response.data
       })
-    );
-};
+    )
+}
 
 // Update Fabricant
 export const updateFabricant = (id, fabData) => dispatch => {
-  dispatch(clearErrors());
+  dispatch(clearErrors())
   axios
-    .put(`/manufacturers/${id}`, fabData)
+    .put(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${id}`, fabData)
     .then(res =>
       dispatch({
         type: ADD_FABRICANT,
@@ -45,13 +45,13 @@ export const updateFabricant = (id, fabData) => dispatch => {
         type: GET_ERRORS,
         payload: err.response.data
       })
-    );
-};
+    )
+}
 // Get Fabricants
 export const getFabricants = () => dispatch => {
-  dispatch(setFabricantLoading());
+  dispatch(setFabricantLoading())
   axios
-    .get('/manufacturers')
+    .get(`${process.env.REACT_APP_BACKEND_URL}/manufacturers`)
     .then(res =>
       dispatch({
         type: GET_FABRICANTS,
@@ -63,14 +63,14 @@ export const getFabricants = () => dispatch => {
         type: GET_FABRICANTS,
         payload: null
       })
-    );
-};
+    )
+}
 
 // Get Fabricant
 export const getFabricant = id => dispatch => {
-  dispatch(setFabricantLoading());
+  dispatch(setFabricantLoading())
   axios
-    .get(`/manufacturers/${id}`)
+    .get(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${id}`)
     .then(res =>
       dispatch({
         type: GET_FABRICANT,
@@ -82,13 +82,13 @@ export const getFabricant = id => dispatch => {
         type: GET_FABRICANT,
         payload: null
       })
-    );
-};
+    )
+}
 
 // Delete Fabricant
 export const deleteFabricant = id => dispatch => {
   axios
-    .delete(`/manufacturers/${id}`)
+    .delete(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${id}`)
     .then(res =>
       dispatch({
         type: DELETE_FABRICANT,
@@ -100,19 +100,19 @@ export const deleteFabricant = id => dispatch => {
         type: GET_ERRORS,
         payload: err.response.data
       })
-    );
-};
+    )
+}
 
 // Set loading state
 export const setFabricantLoading = () => {
   return {
     type: FABRICANT_LOADING
-  };
-};
+  }
+}
 
 // Clear errors
 export const clearErrors = () => {
   return {
     type: CLEAR_ERRORS
-  };
-};
+  }
+}
