@@ -1,6 +1,6 @@
 export default {
   items: [
-    {
+    /*{
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',
@@ -12,17 +12,16 @@ export default {
     {
       title: true,
       name: 'Gestion CRUD',
-    },
+    },*/
     {
       name: 'Fabricants',
       url: '/fabricants',
-      icon: 'icon-pencil',
-    },
-    {
+      icon: 'icon-pencil'
+    }
+    /*{
       name: 'Utilisateurs',
       url: '/users',
-      icon: 'icon-pencil',
-    },
-
-  ],
-};
+      icon: 'icon-pencil'
+    }*/
+  ]
+}
