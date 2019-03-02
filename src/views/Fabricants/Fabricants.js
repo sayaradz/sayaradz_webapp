@@ -20,7 +20,7 @@ function FabricantRow(props) {
           color="danger"
           onClick={() => props.handleDelete(fabricant._id)}
         >
-          &#10006;
+          <i class="fa fa-spinner fa-trash" />
         </Button>
         <FabricantModal
           id={fabricant._id}
