@@ -48,7 +48,7 @@
     "dev": "react-scripts start",
     "heroku-postbuild": "npm run build",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test src/views/Fabricants",
     "test:cov": "react-scripts test --coverage",
     "test:debug": "react-scripts --inspect-brk test --runInBand",
     "eject": "react-scripts eject"

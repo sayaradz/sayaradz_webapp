@@ -9,7 +9,7 @@ import { getFabricants, deleteFabricant } from '../../actions/fabricantActions'
 import axios from 'axios'
 
 function FabricantRow(props) {
-  let count = 0;
+  let count = 0
   const fabricant = props.fabricant
   return (
     <tr key={count++}>
@@ -108,6 +108,8 @@ Fabricants.propTypes = {
 const mapStateToProps = state => ({
   fabricant: state.fabricant
 })
+
+export { Fabricants }
 
 export default connect(
   mapStateToProps,
