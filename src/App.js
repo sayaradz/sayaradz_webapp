@@ -4,6 +4,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import './App.scss';
 
+import PrivateRoute from './views/common/PrivateRoute';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
@@ -14,19 +15,11 @@ import store from './store';
 if (localStorage.jwtToken) {
   // Set auth token header auth
   setAuthToken(localStorage.jwtToken);
-  // Decode token and get user info and exp
+  // Decode token and get user info
   const decoded = jwt_decode(localStorage.jwtToken);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
 
-  // // Check for expired token
-  // const currentTime = Date.now() / 1000;
-  // if (decoded.exp < currentTime) {
-  //   // Logout user
-  //   store.dispatch(logoutUser());
-  //   // Redirect to login
-  //   window.location.href = '/login';
-  // }
 }
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
@@ -40,11 +33,6 @@ const DefaultLayout = Loadable({
 // Pages
 const Login = Loadable({
   loader: () => import('./views/Pages/Login'),
-  loading
-});
-
-const Register = Loadable({
-  loader: () => import('./views/Pages/Register'),
   loading
 });
 
@@ -67,9 +55,12 @@ class App extends Component {
         <HashRouter>
           <Switch>
             <Route exact path="/login" name="Login Page" component={Login} />
-            <Route exact path="/register" name="Register Page" component={Register} />
             <Route exact path="/404" name="Page 404" component={Page404} />
             <Route exact path="/500" name="Page 500" component={Page500} />
+            {/* TURN THIS Route COMPONENT TO PrivateRoute COMPONENT 
+            TO MAKE IT ACCESSIBALE ONLY BY AUTHENTIFICATION 
+            + Don't forget to change the login Route path to "/"
+            */}
             <Route path="/" name="Home" component={DefaultLayout} />
           </Switch>
         </HashRouter>
