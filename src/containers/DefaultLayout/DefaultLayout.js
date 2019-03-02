@@ -1,6 +1,11 @@
 import React, { Component, Suspense } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { Container } from 'reactstrap'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { logoutUser } from '../../actions/authActions';
+import PrivateRoute from '../../views/common/PrivateRoute';
+import Fabricants from '../../views/Fabricants/Fabricants'
 
 import {
   AppAside,
@@ -30,6 +35,7 @@ class DefaultLayout extends Component {
 
   signOut(e) {
     e.preventDefault()
+    this.props.logoutUser()
     this.props.history.push('/login')
   }
 
@@ -58,16 +64,17 @@ class DefaultLayout extends Component {
                 <Switch>
                   {routes.map((route, idx) => {
                     return route.component ? (
-                      <Route
+                      <PrivateRoute
                         key={idx}
+                        component={route.component}
                         path={route.path}
                         exact={route.exact}
                         name={route.name}
                         render={props => <route.component {...props} />}
-                      />
+                      ></PrivateRoute>
                     ) : null
                   })}
-                  <Redirect from="/" to="/fabricants" />
+                  <Redirect from="/" to="/login" />
                 </Switch>
               </Suspense>
             </Container>
@@ -88,4 +95,16 @@ class DefaultLayout extends Component {
   }
 }
 
-export default DefaultLayout
+
+DefaultLayout.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, { logoutUser })(
+  DefaultLayout
+);

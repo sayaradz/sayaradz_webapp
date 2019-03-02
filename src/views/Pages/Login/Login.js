@@ -18,7 +18,16 @@ class Login extends Component {
   }
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push('/dashboard');
+      this.props.history.push('/fabricants');
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push('/fabricants');
+    }
+
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
     }
   }
 
@@ -32,6 +41,7 @@ class Login extends Component {
     }
     this.props.loginUser(userData);
     this.setState({ password: '' });
+    this.props.history.push('/');
   }
 
   render() {
@@ -43,7 +53,7 @@ class Login extends Component {
               <CardGroup>
                 <Card className="p-4">
                   <CardBody>
-                    <Form>
+                    <Form onSubmit={this.handleLogin}>
                       <h1>Login</h1>
                       <p className="text-muted">Sign In to your account</p>
                       <InputGroup className="mb-3">
@@ -71,7 +81,7 @@ class Login extends Component {
                           <Button
                             color="primary"
                             className="px-4"
-                            onClick={this.handleLogin}
+
                           >
                             Login
                           </Button>

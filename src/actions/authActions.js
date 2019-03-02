@@ -7,18 +7,16 @@ import { GET_ERRORS, SET_CURRENT_USER } from './types';
 // Login - Get User Token
 export const loginUser = userData => dispatch => {
   axios
-    .post('/auth/signin', userData)
+    .post(`${process.env.REACT_APP_BACKEND_URL}/auth/signin`, userData)
     .then(res => {
       // Save to localStorage
-      const { token } = res.data;
+      const { token, user } = res.data;
       // Set token to ls
       localStorage.setItem('jwtToken', token);
       // Set token to Auth header
       setAuthToken(token);
-      // Decode token to get user data
-      const decoded = jwt_decode(token);
       // Set current user
-      dispatch(setCurrentUser(decoded));
+      dispatch(setCurrentUser(user));
     })
     .catch(err =>
       dispatch({
@@ -29,10 +27,10 @@ export const loginUser = userData => dispatch => {
 };
 
 // Set logged in user
-export const setCurrentUser = decoded => {
+export const setCurrentUser = user => {
   return {
     type: SET_CURRENT_USER,
-    payload: decoded
+    payload: user
   };
 };
 

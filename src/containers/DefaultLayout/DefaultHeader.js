@@ -39,7 +39,7 @@ class DefaultHeader extends Component {
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 
-        {/*<Nav className="d-md-down-none" navbar>
+        {/* <Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
             <NavLink to="/">Dashboard</NavLink>
           </NavItem>
@@ -49,9 +49,9 @@ class DefaultHeader extends Component {
           <NavItem className="px-3">
             <NavLink to="/fabricants">Fabricants</NavLink>
           </NavItem>
-    </Nav>*/}
+        </Nav> */}
         <Nav className="ml-auto" navbar>
-          {/*<NavItem className="d-md-down-none">
+          {/* <NavItem className="d-md-down-none">
             <NavLink to="#">
               <i className="icon-bell" />
               <Badge pill color="danger">
@@ -68,17 +68,17 @@ class DefaultHeader extends Component {
             <NavLink to="#">
               <i className="icon-location-pin" />
             </NavLink>
-  </NavItem>*/}
-          {/*<AppHeaderDropdown direction="down">
+          </NavItem> */}
+          <AppHeaderDropdown direction="down">
             <DropdownToggle nav>
               <img
-                src={'../../assets/img/avatars/6.jpg'}
+                src={'../../assets/img/avatars/9.jpg'}
                 className="img-avatar"
                 alt="admin@bootstrapmaster.com"
               />
             </DropdownToggle>
             <DropdownMenu right style={{ right: 'auto' }}>
-              <DropdownItem header tag="div" className="text-center">
+              {/* <DropdownItem header tag="div" className="text-center">
                 <strong>Account</strong>
               </DropdownItem>
               <DropdownItem>
@@ -117,15 +117,15 @@ class DefaultHeader extends Component {
               <DropdownItem divider />
               <DropdownItem>
                 <i className="fa fa-shield" /> Lock Account
-              </DropdownItem>
+              </DropdownItem> */}
               <DropdownItem onClick={e => this.props.onLogout(e)}>
                 <i className="fa fa-lock" /> Logout
               </DropdownItem>
             </DropdownMenu>
-  </AppHeaderDropdown>*/}
+          </AppHeaderDropdown>
         </Nav>
-        {/*<AppAsideToggler className="d-md-down-none" />*/}
-        {/*<AppAsideToggler className="d-lg-none" mobile />*/}
+        {/* <AppAsideToggler className="d-md-down-none" />
+        <AppAsideToggler className="d-lg-none" mobile /> */}
       </React.Fragment>
     )
   }

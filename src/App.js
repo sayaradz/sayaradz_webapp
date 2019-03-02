@@ -20,7 +20,6 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(localStorage.jwtToken);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
-
 }
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
@@ -62,10 +61,10 @@ class App extends Component {
             TO MAKE IT ACCESSIBALE ONLY BY AUTHENTIFICATION 
             + Don't forget to change the login Route path to "/"
             */}
+            {/* <PrivateRoute exact
+              path="/fabricants"
+              component={Fabricants}></PrivateRoute> */}
             <Route path="/" name="Home" component={DefaultLayout} />
-            {/* <Switch>
-                <PrivateRoute exact path="/fabricants" component={Fabricants} />
-            </Switch> */}
           </Switch>
         </HashRouter>
       </Provider>
