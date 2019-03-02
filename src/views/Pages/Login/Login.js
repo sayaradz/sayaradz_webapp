@@ -16,6 +16,11 @@ class Login extends Component {
     this.onChange = this.onChange.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
   }
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
+    }
+  }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -44,7 +49,7 @@ class Login extends Component {
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
-                            <i className="icon-user"></i>
+                            <i className="icon-user" />
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input type="text" placeholder="Username" autoComplete="username"
@@ -54,7 +59,7 @@ class Login extends Component {
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
-                            <i className="icon-lock"></i>
+                            <i className="icon-lock" />
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input type="password" placeholder="Password" autoComplete="current-password"
@@ -63,10 +68,18 @@ class Login extends Component {
                       </InputGroup>
                       <Row>
                         <Col xs="6">
-                          <Button color="primary" className="px-4" onSubmit={this.handleLogin}>Login</Button>
+                          <Button
+                            color="primary"
+                            className="px-4"
+                            onClick={this.handleLogin}
+                          >
+                            Login
+                          </Button>
                         </Col>
                         <Col xs="6" className="text-right">
-                          <Button color="link" className="px-0">Forgot password?</Button>
+                          <Button color="link" className="px-0">
+                            Forgot password?
+                          </Button>
                         </Col>
                       </Row>
                     </Form>
@@ -77,16 +90,18 @@ class Login extends Component {
           </Row>
         </Container>
       </div>
-    );
+    )
   }
 }
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+
 };
 
 const mapStateToProps = state => ({
-
+  auth: state.auth
 });
 
 export default connect(mapStateToProps, { loginUser })(Login);

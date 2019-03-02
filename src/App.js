@@ -10,6 +10,7 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { Provider } from 'react-redux';
 import store from './store';
+import Fabricants from './views/Fabricants/Fabricants';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -62,6 +63,9 @@ class App extends Component {
             + Don't forget to change the login Route path to "/"
             */}
             <Route path="/" name="Home" component={DefaultLayout} />
+            {/* <Switch>
+                <PrivateRoute exact path="/fabricants" component={Fabricants} />
+            </Switch> */}
           </Switch>
         </HashRouter>
       </Provider>

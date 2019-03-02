@@ -32,15 +32,15 @@ export default function (state = initialState, action) {
         fabricant: action.payload,
         loading: false
       };
+    case UPDATE_FABRICANT:
+      return {
+        ...state,
+        fabricants: [action.payload, ...state.fabricants.filter(fabricant => fabricant._id !== action.payload._id)]
+      };
     case ADD_FABRICANT:
       return {
         ...state,
         fabricants: [action.payload, ...state.fabricants]
-      };
-    case UPDATE_FABRICANT:
-      return {
-        ...state,
-        fabricants: [action.payload, state.fabricants.filter(fabricant => fabricant._id !== action.payload)]
       };
     case DELETE_FABRICANT:
       return {

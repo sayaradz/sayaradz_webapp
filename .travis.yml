@@ -1,18 +1,16 @@
 language: node_js
 node_js:
-- v10
+  - v10
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
+      - ubuntu-toolchain-r-test
     packages:
-    - gcc-4.8
-    - g++-4.8
-script:
-- npm run build
+      - gcc-4.8
+      - g++-4.8
 env:
   global:
-  - CXX=g++-4.8
+    - CXX=g++-4.8
 deploy:
   provider: heroku
   api_key:
