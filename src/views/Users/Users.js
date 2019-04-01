@@ -1,42 +1,46 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Badge, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
-
-import usersData from './UsersData'
+import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import UserModal from "./UserModal";
+import {getUsers} from "../../actions/userAction";
+import {connect} from "react-redux";
 
 function UserRow(props) {
-  const user = props.user
-  const userLink = `/users/${user.id}`
-
-  const getBadge = (status) => {
-    return status === 'Active' ? 'success' :
-      status === 'Inactive' ? 'secondary' :
-        status === 'Pending' ? 'warning' :
-          status === 'Banned' ? 'danger' :
-            'primary'
-  }
-
+  const user = props.user;
   return (
-    <tr key={user.id.toString()}>
-      <th scope="row"><Link to={userLink}>{user.id}</Link></th>
-      <td><Link to={userLink}>{user.name}</Link></td>
-      <td>{user.registered}</td>
-      <td>{user.role}</td>
-      <td><Link to={userLink}><Badge color={getBadge(user.status)}>{user.status}</Badge></Link></td>
+    <tr key={user.name}>
+      <th scope="row">{user.email}</th>
+      <td>{user.name}</td>
+      <td>{user.username}</td>
+      <td>{user.address.city}</td>
+      <td>{user.phone}</td>
+      <td>
+        <UserModal
+          id={user.name}
+          name={user.name}
+          btnColor="warning"
+          btnText="&#9998;"
+        />
+      </td>
     </tr>
   )
 }
 
 class Users extends Component {
 
+  componentDidMount() {
+    this.props.getUsers('Kia')
+  }
+
   render() {
 
-    const userList = usersData.filter((user) => user.id < 10)
+    //const userList = usersData.filter((user) => user.id < 10);
+    let {users}  = this.props.user;
 
+    console.log(this.props)
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col xl={6}>
+          <Col xl={12}>
             <Card>
               <CardHeader>
                 <i className="fa fa-align-justify"></i> Utilisateurs
@@ -45,15 +49,15 @@ class Users extends Component {
                 <Table responsive hover>
                   <thead>
                     <tr>
-                      <th scope="col">id</th>
-                      <th scope="col">name</th>
-                      <th scope="col">registered</th>
-                      <th scope="col">role</th>
-                      <th scope="col">status</th>
+                      <th scope="col">email</th>
+                      <th scope="col">Nom</th>
+                      <th scope="col">Prénom</th>
+                      <th scope="col">Adresse</th>
+                      <th scope="col">Téléphone</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {userList.map((user, index) =>
+                    {users && users.map((user, index) =>
                       <UserRow key={index} user={user} />
                     )}
                   </tbody>
@@ -67,4 +71,15 @@ class Users extends Component {
   }
 }
 
-export default Users;
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+export { Users }
+
+export default connect(
+  mapStateToProps,
+  { getUsers }
+)(Users)
+
+//export default Users;

@@ -79,7 +79,7 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/charts', name: 'Charts', component: Charts },
-  { path: '/users', exact: true, name: 'Users', component: Users },
+  { path: '/fabricants/:id', exact: true, name: 'Users', component: Users },
   { path: '/fabricants', exact: true, name: 'Fabricants', component: Fabricants },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
 ];
