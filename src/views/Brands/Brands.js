@@ -57,7 +57,7 @@ function BrandRow(props) {
           color="danger"
           onClick={() => handleDelete(props, brand)}
         >
-          <i class="fa fa-spinner fa-trash" />
+          <i className="fa fa-spinner fa-trash" />
         </Button>
         <BrandModal
           id={brand._id}
