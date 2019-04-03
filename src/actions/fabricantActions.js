@@ -1,14 +1,14 @@
 import axios from 'axios'
 
 import {
-  ADD_FABRICANT,
-  UPDATE_FABRICANT,
+  ADD_USER,
+  UPDATE_USER,
   GET_ERRORS,
   CLEAR_ERRORS,
-  GET_FABRICANTS,
-  GET_FABRICANT,
-  DELETE_FABRICANT,
-  FABRICANT_LOADING
+  GET_USERS,
+  GET_USER,
+  DELETE_USER,
+  USER_LOADING
 } from './types'
 
 // Add Fabricant
@@ -18,7 +18,7 @@ export const addFabricant = fabData => dispatch => {
     .post(`${process.env.REACT_APP_BACKEND_URL}/manufacturers`, fabData)
     .then(res =>
       dispatch({
-        type: ADD_FABRICANT,
+        type: ADD_USER,
         payload: res.data
       })
     )
@@ -37,7 +37,7 @@ export const updateFabricant = (id, fabData) => dispatch => {
     .put(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${id}`, fabData)
     .then(res =>
       dispatch({
-        type: UPDATE_FABRICANT,
+        type: UPDATE_USER,
         payload: res.data
       })
     )
@@ -55,13 +55,13 @@ export const getFabricants = () => dispatch => {
     .get(`${process.env.REACT_APP_BACKEND_URL}/manufacturers`)
     .then(res =>
       dispatch({
-        type: GET_FABRICANTS,
+        type: GET_USERS,
         payload: res.data.rows
       })
     )
     .catch(err =>
       dispatch({
-        type: GET_FABRICANTS,
+        type: GET_USERS,
         payload: null
       })
     )
@@ -74,13 +74,13 @@ export const getFabricant = id => dispatch => {
     .get(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${id}`)
     .then(res =>
       dispatch({
-        type: GET_FABRICANT,
+        type: GET_USER,
         payload: res.data
       })
     )
     .catch(err =>
       dispatch({
-        type: GET_FABRICANT,
+        type: GET_USER,
         payload: null
       })
     )
@@ -92,7 +92,7 @@ export const deleteFabricant = id => dispatch => {
     .delete(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${id}`)
     .then(res =>
       dispatch({
-        type: DELETE_FABRICANT,
+        type: DELETE_USER,
         payload: id
       })
     )
@@ -107,7 +107,7 @@ export const deleteFabricant = id => dispatch => {
 // Set loading state
 export const setFabricantLoading = () => {
   return {
-    type: FABRICANT_LOADING
+    type: USER_LOADING
   }
 }
 
