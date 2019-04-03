@@ -17,13 +17,13 @@ class UserModal extends Component {
     super(props);
     this.state = {
       modal: false,
-      name: this.props.name,
+      user: this.props.user,
       error: ''
     };
 
-    this.toggle = this.toggle.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
-    this.onChange = this.onChange.bind(this)
+    this.toggle = this.toggle.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   toggle() {
@@ -41,7 +41,8 @@ class UserModal extends Component {
     const id = this.props.id;
     e.preventDefault();
     const user = {
-      name: this.state.name
+      name: this.state.user.name,
+      email: this.state.user.email
     };
     if (id !== '') {
       this.props.updateUser(id, user)
@@ -52,6 +53,7 @@ class UserModal extends Component {
   }
 
   render() {
+    const {user} = this.state;
     return (
       <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button color={this.props.btnColor} onClick={this.toggle}>
@@ -71,7 +73,7 @@ class UserModal extends Component {
                   type="text"
                   id="email"
                   name="name"
-                  value={this.state.name}
+                  value={user.email}
                   onChange={this.onChange}
                   placeholder="email.."
                 />
@@ -81,7 +83,7 @@ class UserModal extends Component {
                   type="text"
                   id="nom"
                   name="name"
-                  value={this.state.name}
+                  value={user.name}
                   onChange={this.onChange}
                   placeholder="Nom.."
                 />
@@ -91,7 +93,7 @@ class UserModal extends Component {
                   type="text"
                   id="nom"
                   name="name"
-                  value={this.state.name}
+                  value={user.username}
                   onChange={this.onChange}
                   placeholder="Nom.."
                 />
@@ -101,7 +103,7 @@ class UserModal extends Component {
                   type="text"
                   id="nom"
                   name="name"
-                  value={this.state.name}
+                  value={user.address.city}
                   onChange={this.onChange}
                   placeholder="Nom.."
                 />
@@ -111,7 +113,7 @@ class UserModal extends Component {
                   type="text"
                   id="nom"
                   name="name"
-                  value={this.state.name}
+                  value={user.phone}
                   onChange={this.onChange}
                   placeholder="Nom.."
                 />

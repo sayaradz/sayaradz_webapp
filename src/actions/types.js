@@ -1,3 +1,4 @@
+
 export const GET_ERRORS = 'GET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
@@ -9,7 +10,19 @@ export const DELETE_USER = 'DELETE_USER';
 export const USER_LOADING = 'USER_LOADING';
 
 export const GET_FABRICANT_USERS = 'GET_FABRICANT_USERS';
+export const DELETE_FABRICANT_USER = 'DELETE_FABRICANT_USER';
 
 
+export const GET_FABRICANTS = "GET_FABRICANTS";
+export const GET_FABRICANT = "GET_FABRICANT";
+export const ADD_FABRICANT = "ADD_FABRICANT";
+export const UPDATE_FABRICANT = "ADD_FABRICANT";
+export const DELETE_FABRICANT = "DELETE_FABRICANT";
+export const FABRICANT_LOADING = "FABRICANT_LOADING";
 
-
+export const GET_BRANDS = "GET_BRANDS";
+export const GET_BRAND = "GET_BRAND";
+export const ADD_BRAND = "ADD_BRAND";
+export const UPDATE_BRAND = "UPDATE_BRAND";
+export const DELETE_BRAND = "DELETE_BRAND";
+export const BRAND_LOADING = "BRAND_LOADING";

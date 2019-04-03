@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap';
+import {Button, Card, CardBody, CardHeader, Col, Row, Table} from 'reactstrap';
 import UserModal from "./UserModal";
-import {getUsers} from "../../actions/userAction";
+import {getUsers, deleteUser} from "../../actions/userAction";
 import {connect} from "react-redux";
 
 function UserRow(props) {
@@ -13,13 +13,20 @@ function UserRow(props) {
       <td>{user.username}</td>
       <td>{user.address.city}</td>
       <td>{user.phone}</td>
-      <td>
+      <td style={{ display: 'flex', justifyContent: 'flex-end' }}>
         <UserModal
-          id={user.name}
-          name={user.name}
+          user={user}
           btnColor="warning"
           btnText="&#9998;"
         />
+
+        <Button
+          className="mx-2"
+          color="danger"
+          onClick={() => props.handleDelete(user.name)}
+        >
+          <i className="fa fa-spinner fa-trash" />
+        </Button>
       </td>
     </tr>
   )
@@ -54,11 +61,16 @@ class Users extends Component {
                       <th scope="col">Prénom</th>
                       <th scope="col">Adresse</th>
                       <th scope="col">Téléphone</th>
+                      <th scope="col">Téléphone</th>
                     </tr>
                   </thead>
                   <tbody>
                     {users && users.map((user, index) =>
-                      <UserRow key={index} user={user} />
+                      <UserRow
+                        key={index}
+                        user={user}
+                        handleDelete={this.props.deleteUser}
+                      />
                     )}
                   </tbody>
                 </Table>
@@ -79,7 +91,7 @@ export { Users }
 
 export default connect(
   mapStateToProps,
-  { getUsers }
+  { getUsers, deleteUser }
 )(Users)
 
 //export default Users;

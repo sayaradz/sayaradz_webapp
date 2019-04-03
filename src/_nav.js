@@ -1,22 +1,27 @@
 export default {
   items: [
-    /*{
-      name: 'Dashboard',
-      url: '/dashboard',
-      icon: 'icon-speedometer',
+    {
+      name: "Dashboard",
+      url: "/dashboard",
+      icon: "icon-speedometer",
       badge: {
-        variant: 'info',
-        text: 'NEW',
-      },
+        variant: "info",
+        text: "NEW"
+      }
     },
     {
       title: true,
-      name: 'Gestion CRUD',
-    },*/
+      name: "Gestion CRUD"
+    },
     {
-      name: 'Fabricants',
-      url: '/fabricants',
-      icon: 'icon-pencil'
+      name: "Fabricants",
+      url: "/fabricants",
+      icon: "icon-pencil"
+    },
+    {
+      name: "Brands",
+      url: "/brands",
+      icon: "icon-pencil"
     }
     /*{
       name: 'Utilisateurs',
@@ -24,4 +29,4 @@ export default {
       icon: 'icon-pencil'
     }*/
   ]
-}
+};
