@@ -1,25 +1,33 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Button, Card, CardBody, CardHeader, Col, Row, Table } from 'reactstrap'
-import Spinner from '../common/Spinner'
-import FabricantModal from './FabricantModal.js'
-import { getFabricants, deleteFabricant } from '../../actions/fabricantActions'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Row,
+  Table
+} from "reactstrap";
+import Spinner from "../common/Spinner";
+import FabricantModal from "./FabricantModal.js";
+import { getFabricants, deleteFabricant } from "../../actions/fabricantActions";
 
 function FabricantRow(props) {
   const fabricant = props.fabricant;
-  const usersLink = `/fabricants/${fabricant.name}`;
+  const usersLink = `/fabricants/${fabricant._id}`;
   return (
     <tr>
       <td>{fabricant.name}</td>
-      <td style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <td style={{ display: "flex", justifyContent: "flex-end" }}>
         <Link
           to={usersLink}
           className="float-left mr-1 btn btn-success"
-          id={fabricant.name}
+          id={fabricant._id}
         >
-          <i className="fa fa-users"/>
+          <i className="fa fa-users" />
         </Link>
         <Button
           className="float-left mr-1"
@@ -36,12 +44,12 @@ function FabricantRow(props) {
         />
       </td>
     </tr>
-  )
+  );
 }
 
 class Fabricants extends Component {
   componentDidMount() {
-    this.props.getFabricants()
+    this.props.getFabricants();
   }
 
   render() {
@@ -55,7 +63,7 @@ class Fabricants extends Component {
             </Col>
           </Row>
         </div>
-      )
+      );
     } else {
       return (
         <div className="animated fadeIn">
@@ -68,19 +76,19 @@ class Fabricants extends Component {
                 <CardBody>
                   <Table responsive hover>
                     <thead>
-                    <tr>
-                      <th scope="col">Nom</th>
-                      <th scope="col" />
-                    </tr>
+                      <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col" />
+                      </tr>
                     </thead>
                     <tbody>
-                    {fabricants.map(fabricant => (
-                      <FabricantRow
-                        fabricant={fabricant}
-                        handleDelete={this.props.deleteFabricant}
-                        key={fabricant.name}
-                      />
-                    ))}
+                      {fabricants.map(fabricant => (
+                        <FabricantRow
+                          fabricant={fabricant}
+                          handleDelete={this.props.deleteFabricant}
+                          key={fabricant.name}
+                        />
+                      ))}
                     </tbody>
                   </Table>
                 </CardBody>
@@ -101,7 +109,7 @@ class Fabricants extends Component {
             </Col>
           </Row>
         </div>
-      )
+      );
     }
   }
 }
@@ -116,9 +124,9 @@ const mapStateToProps = state => ({
   fabricant: state.fabricant
 });
 
-export { Fabricants }
+export { Fabricants };
 
 export default connect(
   mapStateToProps,
   { getFabricants, deleteFabricant }
-)(Fabricants)
+)(Fabricants);

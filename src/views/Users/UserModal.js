@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 import {
   FormGroup,
   Input,
@@ -9,8 +9,8 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter
-} from 'reactstrap';
-import { connect } from 'react-redux';
+} from "reactstrap";
+import { connect } from "react-redux";
 
 class UserModal extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class UserModal extends Component {
     this.state = {
       modal: false,
       user: this.props.user,
-      error: ''
+      error: ""
     };
 
     this.toggle = this.toggle.bind(this);
@@ -29,13 +29,13 @@ class UserModal extends Component {
   toggle() {
     this.setState(prevState => ({
       modal: !prevState.modal
-    }))
+    }));
   }
 
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
-    })
+    });
   }
   onSubmit(e) {
     const id = this.props.id;
@@ -44,18 +44,18 @@ class UserModal extends Component {
       name: this.state.user.name,
       email: this.state.user.email
     };
-    if (id !== '') {
-      this.props.updateUser(id, user)
+    if (id !== "") {
+      this.props.updateUser(id, user);
     } else {
       //this.props.addFabricant(fabricant)
     }
-    this.setState({ name: '', modal: false })
+    this.setState({ name: "", modal: false });
   }
 
   render() {
-    const {user} = this.state;
+    const { user } = this.state;
     return (
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <Button color={this.props.btnColor} onClick={this.toggle}>
           {this.props.btnText}
         </Button>
@@ -88,17 +88,7 @@ class UserModal extends Component {
                   placeholder="Nom.."
                 />
 
-                <Label htmlFor="Nom">Prénom</Label>
-                <Input
-                  type="text"
-                  id="nom"
-                  name="name"
-                  value={user.username}
-                  onChange={this.onChange}
-                  placeholder="Nom.."
-                />
-
-                <Label htmlFor="Nom">Adresse</Label>
+                {/* <Label htmlFor="Nom">Adresse</Label>
                 <Input
                   type="text"
                   id="nom"
@@ -116,7 +106,7 @@ class UserModal extends Component {
                   value={user.phone}
                   onChange={this.onChange}
                   placeholder="Nom.."
-                />
+                /> */}
               </FormGroup>
             </Form>
           </ModalBody>
@@ -127,14 +117,13 @@ class UserModal extends Component {
           </ModalFooter>
         </Modal>
       </div>
-    )
+    );
   }
 }
 
-
-const mapStateToProps = state => ({})
+const mapStateToProps = state => ({});
 
 export default connect(
   mapStateToProps,
-  {  }
-)(UserModal)
+  {}
+)(UserModal);
