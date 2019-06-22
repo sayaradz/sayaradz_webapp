@@ -15,6 +15,29 @@ import Spinner from "../common/Spinner";
 import FabricantModal from "./FabricantModal.js";
 import { getFabricants, deleteFabricant } from "../../actions/fabricantActions";
 
+import "react-notifications/lib/notifications.css";
+
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import { ADD_FABRICANT, UPDATE_FABRICANT } from "../../actions/types";
+
+const handleDelete = (props, fabricant) => {
+  confirmAlert({
+    title: "Confirmation",
+    message: "Etes-vous sure de vouloir supprimer ce fabricant ?",
+    buttons: [
+      {
+        label: "Oui",
+        onClick: () => props.handleDelete(fabricant._id)
+      },
+      {
+        label: "Non",
+        onClick: () => {}
+      }
+    ]
+  });
+};
+
 function FabricantRow(props) {
   const fabricant = props.fabricant;
   const usersLink = `/fabricants/${fabricant._id}`;
@@ -29,15 +52,18 @@ function FabricantRow(props) {
         >
           <i className="fa fa-users" />
         </Link>
+
         <Button
           className="float-left mr-1"
           color="danger"
-          onClick={() => props.handleDelete(fabricant._id)}
+          onClick={() => handleDelete(props, fabricant)}
         >
           <i className="fa fa-spinner fa-trash" />
         </Button>
+
         <FabricantModal
           id={fabricant._id}
+          type={UPDATE_FABRICANT}
           name={fabricant.name}
           btnColor="warning"
           btnText="&#9998;"
@@ -100,6 +126,7 @@ class Fabricants extends Component {
                     name=""
                     btnColor="primary"
                     btnText="Ajouter"
+                    type={ADD_FABRICANT}
                   />
                 </Col>
               </Row>

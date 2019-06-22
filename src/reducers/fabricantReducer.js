@@ -5,7 +5,8 @@ import {
   UPDATE_USER,
   DELETE_USER,
   USER_LOADING
-} from '../actions/types';
+} from "../actions/types";
+import { NotificationManager } from "react-notifications";
 
 const initialState = {
   fabricants: [],
@@ -13,7 +14,7 @@ const initialState = {
   loading: false
 };
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case USER_LOADING:
       return {
@@ -33,19 +34,35 @@ export default function (state = initialState, action) {
         loading: false
       };
     case UPDATE_USER:
+      NotificationManager.success(
+        "Mise à jour éffectuée avec succés",
+        "Mise à jour"
+      );
       return {
         ...state,
-        fabricants: [action.payload, ...state.fabricants.filter(fabricant => fabricant._id !== action.payload._id)]
+        fabricants: [
+          action.payload,
+          ...state.fabricants.filter(
+            fabricant => fabricant._id !== action.payload._id
+          )
+        ]
       };
     case ADD_USER:
+      NotificationManager.success("Ajout éffectué avec succés", "Ajout");
       return {
         ...state,
         fabricants: [action.payload, ...state.fabricants]
       };
     case DELETE_USER:
+      NotificationManager.success(
+        "Suppression éffectuée avec succés",
+        "Suppression"
+      );
       return {
         ...state,
-        fabricants: state.fabricants.filter(fabricant => fabricant._id !== action.payload)
+        fabricants: state.fabricants.filter(
+          fabricant => fabricant._id !== action.payload
+        )
       };
     default:
       return state;

@@ -18,8 +18,8 @@ export default {
       icon: "icon-pencil"
     },
     {
-      name: "Brands",
-      url: "/brands",
+      name: "Marques",
+      url: "/marques",
       icon: "icon-pencil"
     }
     /*{

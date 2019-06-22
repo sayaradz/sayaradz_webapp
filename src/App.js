@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import React, { Component } from "react";
+import { HashRouter, Route, Switch } from "react-router-dom";
 // import { renderRoutes } from 'react-router-config';
-import Loadable from 'react-loadable';
-import './App.scss';
+import Loadable from "react-loadable";
+import "./App.scss";
 
-import PrivateRoute from './views/common/PrivateRoute';
-import { setCurrentUser, logoutUser } from './actions/authActions';
-import jwt_decode from 'jwt-decode';
-import setAuthToken from './utils/setAuthToken';
-import { Provider } from 'react-redux';
-import store from './store';
-import Fabricants from './views/Fabricants/Fabricants';
+import PrivateRoute from "./views/common/PrivateRoute";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
+import jwt_decode from "jwt-decode";
+import setAuthToken from "./utils/setAuthToken";
+import { Provider } from "react-redux";
+import store from "./store";
+import Fabricants from "./views/Fabricants/Fabricants";
+
+import { NotificationContainer } from "react-notifications";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -22,33 +24,33 @@ if (localStorage.jwtToken) {
   store.dispatch(setCurrentUser(decoded));
 }
 
-const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
+const loading = () => (
+  <div className="animated fadeIn pt-3 text-center">Loading...</div>
+);
 
 // Containers
 const DefaultLayout = Loadable({
-  loader: () => import('./containers/DefaultLayout'),
+  loader: () => import("./containers/DefaultLayout"),
   loading
 });
 
 // Pages
 const Login = Loadable({
-  loader: () => import('./views/Pages/Login'),
+  loader: () => import("./views/Pages/Login"),
   loading
 });
 
 const Page404 = Loadable({
-  loader: () => import('./views/Pages/Page404'),
+  loader: () => import("./views/Pages/Page404"),
   loading
 });
 
 const Page500 = Loadable({
-  loader: () => import('./views/Pages/Page500'),
+  loader: () => import("./views/Pages/Page500"),
   loading
 });
 
-
 class App extends Component {
-
   render() {
     return (
       <Provider store={store}>
@@ -67,6 +69,7 @@ class App extends Component {
             <Route path="/" name="Home" component={DefaultLayout} />
           </Switch>
         </HashRouter>
+        <NotificationContainer />
       </Provider>
     );
   }

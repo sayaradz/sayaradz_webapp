@@ -7,7 +7,7 @@ import {
   BRAND_LOADING
 } from "../actions/types";
 import {
-  NotificationContainer,
+  //NotificationContainer,
   NotificationManager
 } from "react-notifications";
 

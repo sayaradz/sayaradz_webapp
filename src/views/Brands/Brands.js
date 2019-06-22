@@ -16,7 +16,6 @@ import BrandModal from "./BrandModal.js";
 import { getBrands, deleteBrand } from "../../actions/brandActions";
 import axios from "axios";
 
-import { NotificationContainer } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 
 import { confirmAlert } from "react-confirm-alert";
@@ -138,7 +137,6 @@ class Brands extends Component {
               <br />
             </Col>
           </Row>
-          <NotificationContainer />
         </div>
       );
     }

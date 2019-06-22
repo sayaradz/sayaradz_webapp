@@ -19,17 +19,17 @@ function UserRow(props) {
   const user = props.user;
   return (
     <tr key={user.name}>
-      <th scope="row">{user.email}</th>
       <td>{user.name}</td>
-      {/* <td>{user.address.city}</td>
-      <td>{user.phone}</td> */}
+      <td>{user.email}</td>
       <td style={{ display: "flex", justifyContent: "flex-end" }}>
         <UserModal user={user} btnColor="warning" btnText="&#9998;" />
 
         <Button
           className="mx-2"
           color="danger"
-          onClick={() => props.handleDelete(user.name)}
+          onClick={() =>
+            props.handleDelete(this.props.match.params.id, user._id)
+          }
         >
           <i className="fa fa-spinner fa-trash" />
         </Button>
@@ -70,8 +70,8 @@ class Users extends Component {
                   <Table responsive hover>
                     <thead>
                       <tr>
-                        <th scope="col">email</th>
                         <th scope="col">Nom</th>
+                        <th scope="col">Email</th>
                         {/* <th scope="col">Prénom</th> */}
                         {/* <th scope="col">Adresse</th>
                         <th scope="col">Téléphone</th> */}
@@ -92,19 +92,23 @@ class Users extends Component {
               </Card>
             </Col>
           </Row>
-          {/* <Row>
-          <Col xl={12}>
-            <UserModal
-              id=""
-              type={ADD_USER}
-              name=""
-              code=""
-              logo=""
-              btnColor="primary"
-              btnText="Ajouter"
-            />
-          </Col>
-        </Row> */}
+          <Row>
+            <Col xl={12}>
+              <UserModal
+                user={{
+                  name: "",
+                  email: "",
+                  password: "",
+                  picture: "",
+                  role: "user",
+                  fabId: this.props.match.params.id
+                }}
+                type={ADD_USER}
+                btnColor="primary"
+                btnText="Ajouter"
+              />
+            </Col>
+          </Row>
         </div>
       );
     }
