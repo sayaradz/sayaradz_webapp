@@ -1,22 +1,21 @@
+export const GET_ERRORS = "GET_ERRORS";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
-export const GET_ERRORS = 'GET_ERRORS';
-export const CLEAR_ERRORS = 'CLEAR_ERRORS';
-export const SET_CURRENT_USER = 'SET_CURRENT_USER';
-export const GET_USERS = 'GET_USERS';
-export const GET_USER = 'GET_USER';
-export const ADD_USER = 'ADD_USER';
-export const UPDATE_USER = 'ADD_USER';
-export const DELETE_USER = 'DELETE_USER';
-export const USER_LOADING = 'USER_LOADING';
+export const GET_USERS = "GET_USERS";
+export const GET_USER = "GET_USER";
+export const ADD_USER = "ADD_USER";
+export const UPDATE_USER = "UPDATE_USER";
+export const DELETE_USER = "DELETE_USER";
+export const USER_LOADING = "USER_LOADING";
 
-export const GET_FABRICANT_USERS = 'GET_FABRICANT_USERS';
-export const DELETE_FABRICANT_USER = 'DELETE_FABRICANT_USER';
-
+export const GET_FABRICANT_USERS = "GET_FABRICANT_USERS";
+export const DELETE_FABRICANT_USER = "DELETE_FABRICANT_USER";
 
 export const GET_FABRICANTS = "GET_FABRICANTS";
 export const GET_FABRICANT = "GET_FABRICANT";
 export const ADD_FABRICANT = "ADD_FABRICANT";
-export const UPDATE_FABRICANT = "ADD_FABRICANT";
+export const UPDATE_FABRICANT = "UPDATE_FABRICANT";
 export const DELETE_FABRICANT = "DELETE_FABRICANT";
 export const FABRICANT_LOADING = "FABRICANT_LOADING";
 

@@ -10,7 +10,8 @@ import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { Provider } from "react-redux";
 import store from "./store";
-import Fabricants from "./views/Fabricants/Fabricants";
+// import Fabricants from "./views/Fabricants/Fabricants";
+import { getUser } from "./actions/authActions";
 
 import { NotificationContainer } from "react-notifications";
 
@@ -21,7 +22,7 @@ if (localStorage.jwtToken) {
   // Decode token and get user info
   const decoded = jwt_decode(localStorage.jwtToken);
   // Set user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
+  store.dispatch(getUser(decoded.id));
 }
 
 const loading = () => (
@@ -66,7 +67,12 @@ class App extends Component {
             {/* <PrivateRoute exact
               path="/fabricants"
               component={Fabricants}></PrivateRoute> */}
-            <Route path="/" name="Home" component={DefaultLayout} />
+            <PrivateRoute
+              path="/"
+              name="Home"
+              component={DefaultLayout}
+              roles={["manufacturer", "admin"]}
+            />
           </Switch>
         </HashRouter>
         <NotificationContainer />
