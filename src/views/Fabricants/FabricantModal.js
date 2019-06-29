@@ -49,10 +49,11 @@ class FabricantModal extends Component {
     };
     if (id !== "") {
       this.props.updateFabricant(id, fabricant);
+      this.setState({ modal: false });
     } else {
       this.props.addFabricant(fabricant);
+      this.setState({ name: "", modal: false });
     }
-    this.setState({ name: "", modal: false });
   }
 
   render() {

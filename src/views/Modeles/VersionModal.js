@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   FormGroup,
   Input,
-  FormText,
   Label,
   Form,
   Button,

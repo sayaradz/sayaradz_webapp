@@ -59,10 +59,11 @@ class BrandModal extends Component {
     };
     if (id !== "") {
       this.props.updateBrand(id, brand);
+      this.setState({ modal: false });
     } else {
       this.props.addBrand(brand);
+      this.setState({ name: "", code: "", logo: "", modal: false });
     }
-    this.setState({ name: "", code: "", logo: "", modal: false });
   }
 
   render() {

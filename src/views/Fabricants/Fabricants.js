@@ -110,6 +110,7 @@ class Fabricants extends Component {
                     <tbody>
                       {fabricants.map(fabricant => (
                         <FabricantRow
+                          key={fabricant._id}
                           fabricant={fabricant}
                           handleDelete={this.props.deleteFabricant}
                           key={fabricant.name}

@@ -2,7 +2,7 @@ export default {
   items: [
     {
       name: "Dashboard",
-      url: "/dashboard",
+      url: "/manufacturerDashboard",
       icon: "icon-speedometer",
       badge: {
         variant: "info"
@@ -13,13 +13,13 @@ export default {
       name: "Gestion CRUD"
     },
     {
-      name: "Fabricants",
-      url: "/fabricants",
+      name: "Couleurs",
+      url: "/colors",
       icon: "icon-pencil"
     },
     {
-      name: "Marques",
-      url: "/brands",
+      name: "Modéles",
+      url: "/models",
       icon: "icon-pencil"
     }
     // {

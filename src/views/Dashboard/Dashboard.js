@@ -1,25 +1,6 @@
-import React, { Component, lazy, Suspense } from "react";
-import { Bar, Line } from "react-chartjs-2";
-import {
-  Badge,
-  Button,
-  ButtonDropdown,
-  ButtonGroup,
-  ButtonToolbar,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  Col,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Progress,
-  Row,
-  Table
-} from "reactstrap";
+import React, { Component } from "react";
+import { Line } from "react-chartjs-2";
+import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 import { CustomTooltips } from "@coreui/coreui-plugin-chartjs-custom-tooltips";
 import { getStyle, hexToRgba } from "@coreui/coreui/dist/js/coreui-utilities";
 import { getFabricants } from "../../actions/fabricantActions";
@@ -27,12 +8,8 @@ import { getBrands } from "../../actions/brandActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const Widget03 = lazy(() => import("../../views/Widgets/Widget03"));
-
-const brandPrimary = getStyle("--primary");
 const brandSuccess = getStyle("--success");
 const brandInfo = getStyle("--info");
-const brandWarning = getStyle("--warning");
 const brandDanger = getStyle("--danger");
 
 // Main Chart
@@ -53,65 +30,65 @@ for (var i = 0; i <= elements; i++) {
   data3.push(65);
 }
 
-const mainChart = {
-  labels: [
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa",
-    "Su",
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa",
-    "Su",
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa",
-    "Su",
-    "Mo",
-    "Tu",
-    "We",
-    "Th",
-    "Fr",
-    "Sa",
-    "Su"
-  ],
-  datasets: [
-    {
-      label: "My First dataset",
-      backgroundColor: hexToRgba(brandInfo, 10),
-      borderColor: brandInfo,
-      pointHoverBackgroundColor: "#fff",
-      borderWidth: 2,
-      data: data1
-    },
-    {
-      label: "My Second dataset",
-      backgroundColor: "transparent",
-      borderColor: brandSuccess,
-      pointHoverBackgroundColor: "#fff",
-      borderWidth: 2,
-      data: data2
-    },
-    {
-      label: "My Third dataset",
-      backgroundColor: "transparent",
-      borderColor: brandDanger,
-      pointHoverBackgroundColor: "#fff",
-      borderWidth: 1,
-      borderDash: [8, 5],
-      data: data3
-    }
-  ]
-};
+// const mainChart = {
+//   labels: [
+//     "Mo",
+//     "Tu",
+//     "We",
+//     "Th",
+//     "Fr",
+//     "Sa",
+//     "Su",
+//     "Mo",
+//     "Tu",
+//     "We",
+//     "Th",
+//     "Fr",
+//     "Sa",
+//     "Su",
+//     "Mo",
+//     "Tu",
+//     "We",
+//     "Th",
+//     "Fr",
+//     "Sa",
+//     "Su",
+//     "Mo",
+//     "Tu",
+//     "We",
+//     "Th",
+//     "Fr",
+//     "Sa",
+//     "Su"
+//   ],
+//   datasets: [
+//     {
+//       label: "My First dataset",
+//       backgroundColor: hexToRgba(brandInfo, 10),
+//       borderColor: brandInfo,
+//       pointHoverBackgroundColor: "#fff",
+//       borderWidth: 2,
+//       data: data1
+//     },
+//     {
+//       label: "My Second dataset",
+//       backgroundColor: "transparent",
+//       borderColor: brandSuccess,
+//       pointHoverBackgroundColor: "#fff",
+//       borderWidth: 2,
+//       data: data2
+//     },
+//     {
+//       label: "My Third dataset",
+//       backgroundColor: "transparent",
+//       borderColor: brandDanger,
+//       pointHoverBackgroundColor: "#fff",
+//       borderWidth: 1,
+//       borderDash: [8, 5],
+//       data: data3
+//     }
+//   ]
+// };
 
 const mainChartOpts = {
   tooltips: {
