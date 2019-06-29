@@ -41,6 +41,7 @@ const Widgets = React.lazy(() => import("./views/Widgets/Widgets"));
 const Users = React.lazy(() => import("./views/Users/Users"));
 const Fabricants = React.lazy(() => import("./views/Fabricants/Fabricants"));
 const Brands = React.lazy(() => import("./views/Brands/Brands"));
+const Models = React.lazy(() => import("./views/Modeles/Modeles"));
 const User = React.lazy(() => import("./views/Users/User"));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -84,6 +85,7 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/charts', name: 'Charts', component: Charts },
+  { path: '/brands/:id/models', exact: true, name: 'Modeles', component: Models },
   { path: '/fabricants/:id', exact: true, name: 'Users', component: Users },
   { path: '/fabricants', exact: true, name: 'Fabricants', component: Fabricants },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
@@ -129,7 +131,7 @@ const routes = [
     name: "Fabricants",
     component: Fabricants
   },
-  { path: "/brands", exact: true, name: "Brands", component: Brands },
+  { path: "/brands", exact: true, name: "Marques", component: Brands },
   { path: "/users/:id", exact: true, name: "User Details", component: User }
 ];
 

@@ -21,8 +21,14 @@ export const DELETE_FABRICANT = "DELETE_FABRICANT";
 export const FABRICANT_LOADING = "FABRICANT_LOADING";
 
 export const GET_BRANDS = "GET_BRANDS";
-export const GET_BRAND = "GET_BRAND";
-export const ADD_BRAND = "ADD_BRAND";
-export const UPDATE_BRAND = "UPDATE_BRAND";
+export const GET_MODEL = "GET_MODEL";
+export const ADD_VERSION = "ADD_VERSION";
+export const ADD_MODEL = "ADD_MODEL";
+export const UPDATE_MODEL = "UPDATE_MODEL";
 export const DELETE_BRAND = "DELETE_BRAND";
-export const BRAND_LOADING = "BRAND_LOADING";
+export const MODEL_LOADING = "MODEL_LOADING";
+
+export const GET_MODELS = "GET_MODELS";
+export const DELETE_MODEL = "DELETE_MODEL";
+export const SET_CURRENT_MODEL = "SET_CURRENT_MODEL";
+

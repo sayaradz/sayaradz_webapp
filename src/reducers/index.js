@@ -4,6 +4,7 @@ import errorReducer from './errorReducer';
 import fabricantReducer from './fabricantReducer';
 import userReducer from "./userReducer";
 import brandReducer from "./brandReducer";
+import modelReducer from './modelReducer';
 
 
 
@@ -12,5 +13,6 @@ export default combineReducers({
   errors: errorReducer,
   fabricant: fabricantReducer,
   user: userReducer,
-  brand: brandReducer
+  brand: brandReducer,
+  model: modelReducer
 });

@@ -21,7 +21,7 @@ import "react-notifications/lib/notifications.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
-import { ADD_BRAND, UPDATE_BRAND } from "../../actions/types";
+import { ADD_VERSION, UPDATE_MODEL } from "../../actions/types";
 
 const handleDelete = (props, brand) => {
   confirmAlert({
@@ -56,11 +56,11 @@ function BrandRow(props) {
           color="danger"
           onClick={() => handleDelete(props, brand)}
         >
-          <i className="fa fa-spinner fa-trash" />
+          <i className="fa fa-spinnerde fa-trash" />
         </Button>
         <BrandModal
           id={brand._id}
-          type={UPDATE_BRAND}
+          type={UPDATE_MODEL}
           name={brand.name}
           code={brand.code}
           logo={brand.logo}
@@ -123,7 +123,7 @@ class Brands extends Component {
                 <Col xl={12}>
                   <BrandModal
                     id=""
-                    type={ADD_BRAND}
+                    type={ADD_VERSION}
                     name=""
                     code=""
                     logo=""

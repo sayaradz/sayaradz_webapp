@@ -1,10 +1,11 @@
 import {
   ADD_VERSION,
-  GET_BRANDS,
+  ADD_MODEL,
+  GET_MODELS,
   GET_MODEL,
   UPDATE_MODEL,
-  DELETE_BRAND,
-  MODEL_LOADING
+  MODEL_LOADING,
+  DELETE_MODEL, SET_CURRENT_MODEL
 } from "../actions/types";
 import {
   //NotificationContainer,
@@ -12,9 +13,11 @@ import {
 } from "react-notifications";
 
 const initialState = {
-  brands: [],
-  brand: {},
-  loading: false
+  models: [],
+  model: {},
+  current_model: {},
+  loading: false,
+  brand: {}
 };
 
 export default function(state = initialState, action) {
@@ -24,17 +27,23 @@ export default function(state = initialState, action) {
         ...state,
         loading: true
       };
-    case GET_BRANDS:
+    case GET_MODELS:
       return {
         ...state,
-        brands: action.payload,
+        models: action.payload.models,
+        brand: action.payload,
         loading: false
       };
     case GET_MODEL:
       return {
         ...state,
-        brand: action.payload,
+        model: action.payload,
         loading: false
+      };
+    case SET_CURRENT_MODEL:
+      return {
+        ...state,
+        current_model: action.payload
       };
     case UPDATE_MODEL:
       NotificationManager.success(
@@ -43,25 +52,31 @@ export default function(state = initialState, action) {
       );
       return {
         ...state,
-        brands: [
+        models: [
           action.payload,
-          ...state.brands.filter(brand => brand._id !== action.payload._id)
+          ...state.models.filter(model => model._id !== action.payload._id)
         ]
+      };
+    case ADD_MODEL:
+      NotificationManager.success("Ajout éffectué avec succés", "Ajout");
+      return {
+        ...state,
+        models: [action.payload, ...state.models]
       };
     case ADD_VERSION:
       NotificationManager.success("Ajout éffectué avec succés", "Ajout");
       return {
         ...state,
-        brands: [action.payload, ...state.brands]
+        current_model: action.payload
       };
-    case DELETE_BRAND:
+    case DELETE_MODEL:
       NotificationManager.success(
         "Suppression éffectuée avec succés",
         "Suppression"
       );
       return {
         ...state,
-        brands: state.brands.filter(brand => brand._id !== action.payload)
+        models: state.models.filter(model => model._id !== action.payload)
       };
     default:
       return state;

@@ -13,10 +13,10 @@ import {
 } from "reactstrap";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addModel, updateModel } from "../../actions/brandActions";
-import { ADD_VERSION, UPDATE_MODEL } from "../../actions/types";
+import { addModel } from "../../actions/modelActions";
+import { ADD_VERSION } from "../../actions/types";
 
-class BrandModal extends Component {
+class ModelModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,17 +52,15 @@ class BrandModal extends Component {
   onSubmit(e) {
     const id = this.props.id;
     e.preventDefault();
-    const brand = {
+    const model = {
       name: this.state.name,
       code: this.state.code,
-      logo: this.state.logo
     };
     if (id !== "") {
-      this.props.updateBrand(id, brand);
     } else {
-      this.props.addBrand(brand);
+      this.props.addModel(model);
     }
-    this.setState({ name: "", code: "", logo: "", modal: false });
+    this.setState({ name: "", code: "", modal: false });
   }
 
   render() {
@@ -77,7 +75,7 @@ class BrandModal extends Component {
           className={this.props.className}
         >
           <ModalHeader toggle={this.toggle}>
-            {this.state.type} une Marque
+            {this.state.type} un Modèle
           </ModalHeader>
           <ModalBody>
             <Form id="form1" onSubmit={this.onSubmit}>
@@ -89,7 +87,7 @@ class BrandModal extends Component {
                   name="name"
                   value={this.state.name}
                   onChange={this.onChange}
-                  placeholder="Nom de la marque.."
+                  placeholder="Nom du modèle.."
                 />
                 <Label htmlFor="code">Code</Label>
                 <Input
@@ -98,20 +96,8 @@ class BrandModal extends Component {
                   name="code"
                   value={this.state.code}
                   onChange={this.onChange}
-                  placeholder="Code de la marque.."
+                  placeholder="Code du modèle.."
                 />
-                <Label htmlFor="logo">Logo</Label>
-                <Input
-                  type="text"
-                  id="logo"
-                  name="logo"
-                  value={this.state.logo}
-                  onChange={this.onChange}
-                  placeholder="Lien vers le logo.."
-                />
-                <FormText className="help-block">
-                  Veuillez entrer les informations de la marque
-                </FormText>
               </FormGroup>
             </Form>
           </ModalBody>
@@ -125,14 +111,13 @@ class BrandModal extends Component {
     );
   }
 }
-BrandModal.propTypes = {
-  addBrand: PropTypes.func.isRequired,
-  updateBrand: PropTypes.func.isRequired
+ModelModal.propTypes = {
+  addModel: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({});
 
 export default connect(
   mapStateToProps,
-  { addBrand: addModel, updateBrand: updateModel }
-)(BrandModal);
+  { addModel: addModel }
+)(ModelModal);

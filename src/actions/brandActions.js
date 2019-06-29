@@ -1,24 +1,24 @@
 import axios from "axios";
 
 import {
-  ADD_BRAND,
-  UPDATE_BRAND,
+  ADD_VERSION,
+  UPDATE_MODEL,
   GET_ERRORS,
   CLEAR_ERRORS,
   GET_BRANDS,
-  GET_BRAND,
+  GET_MODEL,
   DELETE_BRAND,
-  BRAND_LOADING
+  MODEL_LOADING
 } from "./types";
 
 // Add BRAND
-export const addBrand = brandData => dispatch => {
+export const addModel = brandData => dispatch => {
   dispatch(clearErrors());
   axios
     .post(`${process.env.REACT_APP_BACKEND_URL}/brands`, brandData)
     .then(res =>
       dispatch({
-        type: ADD_BRAND,
+        type: ADD_VERSION,
         payload: res.data
       })
     )
@@ -31,13 +31,13 @@ export const addBrand = brandData => dispatch => {
 };
 
 // Update BRAND
-export const updateBrand = (id, brandData) => dispatch => {
+export const updateModel = (id, brandData) => dispatch => {
   dispatch(clearErrors());
   axios
     .put(`${process.env.REACT_APP_BACKEND_URL}/brands/${id}`, brandData)
     .then(res =>
       dispatch({
-        type: UPDATE_BRAND,
+        type: UPDATE_MODEL,
         payload: res.data
       })
     )
@@ -74,13 +74,13 @@ export const getBrand = id => dispatch => {
     .get(`${process.env.REACT_APP_BACKEND_URL}/brands/${id}`)
     .then(res =>
       dispatch({
-        type: GET_BRAND,
+        type: GET_MODEL,
         payload: res.data
       })
     )
     .catch(err =>
       dispatch({
-        type: GET_BRAND,
+        type: GET_MODEL,
         payload: null
       })
     );
@@ -107,7 +107,7 @@ export const deleteBrand = id => dispatch => {
 // Set loading state
 export const setBrandLoading = () => {
   return {
-    type: BRAND_LOADING
+    type: MODEL_LOADING
   };
 };
 
