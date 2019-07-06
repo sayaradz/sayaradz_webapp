@@ -22,14 +22,17 @@ function UserRow(props) {
       <td>{user.name}</td>
       <td>{user.email}</td>
       <td style={{ display: "flex", justifyContent: "flex-end" }}>
-        <UserModal user={user} btnColor="warning" btnText="&#9998;" />
+        <UserModal
+          user={user}
+          type={false}
+          btnColor="warning"
+          btnText="&#9998;"
+        />
 
         <Button
           className="mx-2"
           color="danger"
-          onClick={() =>
-            props.handleDelete(this.props.match.params.id, user._id)
-          }
+          onClick={() => props.handleDelete(this.props.location.id, user._id)}
         >
           <i className="fa fa-spinner fa-trash" />
         </Button>
@@ -40,19 +43,18 @@ function UserRow(props) {
 
 class Users extends Component {
   componentDidMount() {
-    const id = this.props.match.params.id;
+    const id = this.props.location.id;
     this.props.getUsers(id);
   }
   render() {
     //const userList = usersData.filter((user) => user.id < 10);
     let { users, loading } = this.props.user;
-    console.log(this.props.user);
     if (!users || loading) {
       return (
         <div className="animated fadeIn">
           <Row>
             <Col xl={6}>
-              <Spinner />;
+              <Spinner />
             </Col>
           </Row>
         </div>
@@ -100,10 +102,10 @@ class Users extends Component {
                   email: "",
                   password: "",
                   picture: "",
-                  role: "user",
+                  role: "manufacturer",
                   fabId: this.props.match.params.id
                 }}
-                type={ADD_USER}
+                type={true}
                 btnColor="primary"
                 btnText="Ajouter"
               />

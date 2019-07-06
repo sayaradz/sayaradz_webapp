@@ -22,10 +22,11 @@ class UserModal extends Component {
       name: this.props.user.name,
       email: this.props.user.email,
       password: this.props.user.password,
-      picutre: this.props.user.picture,
+      picutre: "123",
       role: this.props.user.role,
       fabId: this.props.user.fabId,
-      error: ""
+      error: "",
+      type: this.props.type
     };
 
     this.toggle = this.toggle.bind(this);
@@ -45,19 +46,20 @@ class UserModal extends Component {
     });
   }
   onSubmit(e) {
-    const id = this.props.id;
+    const id = this.props.user._id;
     e.preventDefault();
     const user = {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      picture: this.state.picture,
-      role: "user"
+      picture: "123",
+      role: "manufacturer"
     };
-    if (id !== "") {
-      this.props.updateUser(id, user);
-    } else {
+    if (this.state.type) {
       this.props.addUser(this.state.fabId, user);
+      console.log(id);
+    } else {
+      this.props.updateUser(id, user);
     }
     this.setState({
       name: "",
@@ -70,6 +72,9 @@ class UserModal extends Component {
 
   render() {
     const { user } = this.state;
+    const title = this.state.type
+      ? "Ajouter utilisateur"
+      : "Mettre à jour utilisateur";
     return (
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <Button color={this.props.btnColor} onClick={this.toggle}>
@@ -80,7 +85,7 @@ class UserModal extends Component {
           toggle={this.toggle}
           className={this.props.className}
         >
-          <ModalHeader toggle={this.toggle}>Mettre a jour</ModalHeader>
+          <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
           <ModalBody>
             <Form id="form1" onSubmit={this.onSubmit}>
               <FormGroup>
@@ -93,7 +98,7 @@ class UserModal extends Component {
                   onChange={this.onChange}
                   placeholder="Nom.."
                 />
-
+                <br />
                 <Label htmlFor="email">e-mail</Label>
                 <Input
                   type="text"
@@ -103,6 +108,7 @@ class UserModal extends Component {
                   onChange={this.onChange}
                   placeholder="email.."
                 />
+                <br />
 
                 <Label htmlFor="password">password</Label>
                 <Input

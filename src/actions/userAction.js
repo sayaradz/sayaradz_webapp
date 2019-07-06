@@ -59,7 +59,7 @@ export const getUsers = id => dispatch => {
 export const updateUser = (id, userData) => dispatch => {
   dispatch(clearErrors());
   axios
-    .put(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${id}/`, userData)
+    .put(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${id}`, userData)
     .then(res =>
       dispatch({
         type: UPDATE_USER,

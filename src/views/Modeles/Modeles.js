@@ -12,7 +12,12 @@ import {
 } from "reactstrap";
 import Spinner from "../common/Spinner";
 import ModelModal from "./ModelModal";
-import { getModels, getBrand, deleteModel, setCurrentModel } from "../../actions/modelActions";
+import {
+  getModels,
+  getBrand,
+  deleteModel,
+  setCurrentModel
+} from "../../actions/modelActions";
 
 import "react-notifications/lib/notifications.css";
 
@@ -79,7 +84,7 @@ class Modeles extends Component {
         <div className="animated fadeIn">
           <Row>
             <Col xl={6}>
-              <Spinner />;
+              <Spinner />
             </Col>
           </Row>
         </div>
@@ -99,21 +104,21 @@ class Modeles extends Component {
                 <CardBody>
                   <Table responsive hover>
                     <thead>
-                    <tr>
-                      <th scope="col">Code</th>
-                      <th scope="col">Nom</th>
-                      <th scope="col" />
-                    </tr>
+                      <tr>
+                        <th scope="col">Code</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col" />
+                      </tr>
                     </thead>
                     <tbody>
-                    {models.map(model => (
-                      <ModelRow
-                        model={model}
-                        handleDelete={this.props.deleteModel}
-                        key={model._id}
-                        onClick={() =>this.props.setCurrentModel(model)}
-                      />
-                    ))}
+                      {models.map(model => (
+                        <ModelRow
+                          model={model}
+                          handleDelete={this.props.deleteModel}
+                          key={model._id}
+                          onClick={() => this.props.setCurrentModel(model)}
+                        />
+                      ))}
                     </tbody>
                   </Table>
                 </CardBody>
@@ -156,9 +161,14 @@ class Modeles extends Component {
                   <h1>Fabriquant : {current_model.name}</h1>
                   <h1>Versions : </h1>
                   <ul>
-                    {versions != undefined && versions.map(version => {
-                      return <li key={version._id}><h2>{version.name}</h2></li>
-                    })}
+                    {versions != undefined &&
+                      versions.map(version => {
+                        return (
+                          <li key={version._id}>
+                            <h2>{version.name}</h2>
+                          </li>
+                        );
+                      })}
                   </ul>
                 </CardBody>
               </Card>

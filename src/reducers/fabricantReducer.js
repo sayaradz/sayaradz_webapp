@@ -41,10 +41,15 @@ export default function(state = initialState, action) {
       return {
         ...state,
         fabricants: [
-          action.payload,
-          ...state.fabricants.filter(
-            fabricant => fabricant._id !== action.payload._id
-          )
+          ...state.fabricants.map(f => {
+            if (f._id === action.payload._id) return action.payload;
+            else return f;
+          })
+
+          // action.payload,
+          // ...state.fabricants.filter(
+          //   fabricant => fabricant._id !== action.payload._id
+          // )
         ]
       };
     case ADD_USER:

@@ -10,7 +10,7 @@ export default {
     },
     {
       title: true,
-      name: "Gestion CRUD"
+      name: "Gestion des informations"
     },
     {
       name: "Fabricants",

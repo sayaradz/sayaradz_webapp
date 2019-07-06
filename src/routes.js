@@ -17,19 +17,29 @@ const Models = React.lazy(() => import("./views/Models/Models"));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
-  { path: '/', exact: true, name: 'Home', component: DefaultLayout },
-  { path: '/dashboard', name: 'Dashboard', component: Dashboard },
-  { path: '/theme', exact: true, name: 'Theme', component: Colors },
-  { path: '/theme/colors', name: 'Colors', component: Colors },
-  { path: '/brands/:id/models', exact: true, name: 'Modeles', component: Models },
-  { path: '/fabricants/:id', exact: true, name: 'Users', component: Users },
-  { path: '/fabricants', exact: true, name: 'Fabricants', component: Fabricants },
-  { path: '/users/:id', exact: true, name: 'User Details', component: User },
+  // { path: "/", exact: true, name: "Home", component: DefaultLayout },
+  // { path: "/dashboard", name: "Dashboard", component: Dashboard },
+  // { path: "/theme", exact: true, name: "Theme", component: Colors },
+  // { path: "/theme/colors", name: "Colors", component: Colors },
+  // {
+  //   path: "/brands/:id/models",
+  //   exact: true,
+  //   name: "Modeles",
+  //   component: Models
+  // },
+  // { path: "/fabricants/:id", exact: true, name: "Users", component: Users },
+  // {
+  //   path: "/fabricants",
+  //   exact: true,
+  //   name: "Fabricants",
+  //   component: Fabricants
+  // },
+  // { path: "/users/:id", exact: true, name: "User Details", component: User },
 
   {
     path: "/",
     exact: true,
-    name: "Home",
+    name: "Accueil",
     component: DefaultLayout,
     roles: ["admin", "manufacturer"]
   },
@@ -43,7 +53,7 @@ const routes = [
   {
     path: "/fabricants/:id",
     exact: true,
-    name: "Users",
+    name: "Utilisateurs",
     component: Users,
     roles: ["admin"]
   },
@@ -76,8 +86,8 @@ const routes = [
     component: Brands,
     roles: ["admin"]
   },
-  { path: "/brands", exact: true, name: "Marques", component: Brands },
-  { path: "/users/:id", exact: true, name: "User Details", component: User },
+  // { path: "/brands", exact: true, name: "Marques", component: Brands },
+  // { path: "/users/:id", exact: true, name: "User Details", component: User },
   {
     path: "/users/:id",
     exact: true,
@@ -106,7 +116,6 @@ const routes = [
     component: Models,
     roles: ["manufacturer"]
   }
-
 ];
 
 export default routes;

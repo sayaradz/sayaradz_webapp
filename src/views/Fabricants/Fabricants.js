@@ -40,7 +40,10 @@ const handleDelete = (props, fabricant) => {
 
 function FabricantRow(props) {
   const fabricant = props.fabricant;
-  const usersLink = `/fabricants/${fabricant._id}`;
+  const usersLink = {
+    pathname: `/fabricants/${fabricant._id}`,
+    id: fabricant._id
+  };
   return (
     <tr>
       <td>{fabricant.name}</td>
@@ -85,7 +88,7 @@ class Fabricants extends Component {
         <div className="animated fadeIn">
           <Row>
             <Col xl={6}>
-              <Spinner />;
+              <Spinner />
             </Col>
           </Row>
         </div>
@@ -113,7 +116,6 @@ class Fabricants extends Component {
                           key={fabricant._id}
                           fabricant={fabricant}
                           handleDelete={this.props.deleteFabricant}
-                          key={fabricant.name}
                         />
                       ))}
                     </tbody>

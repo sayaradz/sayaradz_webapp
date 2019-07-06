@@ -2,15 +2,14 @@ import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
 import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
 import { CustomTooltips } from "@coreui/coreui-plugin-chartjs-custom-tooltips";
-import { getStyle, hexToRgba } from "@coreui/coreui/dist/js/coreui-utilities";
 import { getFabricants } from "../../actions/fabricantActions";
 import { getBrands } from "../../actions/brandActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-const brandSuccess = getStyle("--success");
-const brandInfo = getStyle("--info");
-const brandDanger = getStyle("--danger");
+// const brandSuccess = getStyle("--success");
+// const brandInfo = getStyle("--info");
+// const brandDanger = getStyle("--danger");
 
 // Main Chart
 
@@ -226,7 +225,7 @@ class Dashboard extends Component {
                   style={{ height: 300 + "px", marginTop: 40 + "px" }}
                 >
                   {/* <Line data={mainChart} options={mainChartOpts} height={300} /> */}
-                  <Line options={mainChartOpts} height={300} />
+                  <Line data={{}} options={mainChartOpts} height={300} />
                 </div>
               </CardBody>
               {/* <CardFooter>

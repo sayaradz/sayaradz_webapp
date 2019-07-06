@@ -1,14 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Row,
-} from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 import Spinner from "../common/Spinner";
 import BrandModal from "./BrandModal.js";
 import { getBrands, deleteBrand } from "../../actions/brandActions";
@@ -23,9 +16,7 @@ import { ADD_VERSION } from "../../actions/types";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import filterFactory from "react-bootstrap-table2-filter";
-import ToolkitProvider, {
-  Search,
-} from "react-bootstrap-table2-toolkit";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 import { ADD_BRAND, UPDATE_BRAND } from "../../actions/types";
 
@@ -117,7 +108,7 @@ class Brands extends Component {
         <div className="animated fadeIn">
           <Row>
             <Col xl={6}>
-              <Spinner />;
+              <Spinner />
             </Col>
           </Row>
         </div>
@@ -132,20 +123,6 @@ class Brands extends Component {
                   <i className="fa fa-align-justify" /> Marques
                 </CardHeader>
                 <CardBody style={style}>
-                  <Row>
-                    <Col xl={12}>
-                      <BrandModal
-                        id=""
-                        type={ADD_BRAND}
-                        name=""
-                        code=""
-                        logo=""
-                        btnColor="primary"
-                        btnText="Ajouter"
-                      />
-                    </Col>
-                  </Row>
-
                   <ToolkitProvider
                     keyField="_id"
                     data={brands}

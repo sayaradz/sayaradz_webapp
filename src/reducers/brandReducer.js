@@ -44,8 +44,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         brands: [
-          action.payload,
-          ...state.brands.filter(brand => brand._id !== action.payload._id)
+          ...state.brands.map(b => {
+            if (b._id === action.payload._id) return action.payload;
+            else return b;
+          })
+          // action.payload,
+          // ...state.brands.filter(brand => brand._id !== action.payload._id)
         ]
       };
     case ADD_VERSION:
