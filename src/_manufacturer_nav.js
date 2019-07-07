@@ -18,6 +18,11 @@ export default {
       icon: "icon-pencil"
     },
     {
+      name: "Options",
+      url: "/options",
+      icon: "icon-pencil"
+    },
+    {
       name: "Modéles",
       url: "/models",
       icon: "icon-pencil"

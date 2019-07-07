@@ -35,3 +35,10 @@ export const ADD_COLOR = "ADD_COLOR";
 export const UPDATE_COLOR = "UPDATE_COLOR";
 export const DELETE_COLOR = "DELETE_COLOR";
 export const COLOR_LOADING = "COLOR_LOADING";
+
+export const GET_OPTIONS = "GET_OPTIONS";
+export const GET_OPTION = "GET_OPTION";
+export const ADD_OPTION = "ADD_OPTION";
+export const UPDATE_OPTION = "UPDATE_OPTION";
+export const DELETE_OPTION = "DELETE_OPTION";
+export const OPTION_LOADING = "OPTION_LOADING";

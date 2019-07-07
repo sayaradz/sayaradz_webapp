@@ -13,6 +13,7 @@ const manufacturer_Dashboard = React.lazy(() =>
   import("./views/Dashboard/ManufacturerDashboard")
 );
 const Colors = React.lazy(() => import("./views/Colors/Colors"));
+const Options = React.lazy(() => import("./views/Options/Options"));
 const Models = React.lazy(() => import("./views/Models/Models"));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
@@ -98,14 +99,21 @@ const routes = [
   {
     path: "/colors/",
     exact: true,
-    name: "Manufacturer colors",
+    name: "Couleurs",
     component: Colors,
+    roles: ["manufacturer"]
+  },
+  {
+    path: "/options/",
+    exact: true,
+    name: "Options",
+    component: Options,
     roles: ["manufacturer"]
   },
   {
     path: "/manufacturerDashboard",
     exact: true,
-    name: "ManufacturerDashboard",
+    name: "Dashboard Fabricant",
     component: manufacturer_Dashboard,
     roles: ["manufacturer"]
   },
