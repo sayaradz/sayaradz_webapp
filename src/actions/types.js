@@ -29,3 +29,9 @@ export const GET_MODELS = "GET_MODELS";
 export const DELETE_MODEL = "DELETE_MODEL";
 export const SET_CURRENT_MODEL = "SET_CURRENT_MODEL";
 
+export const GET_COLORS = "GET_COLORS";
+export const GET_COLOR = "GET_COLOR";
+export const ADD_COLOR = "ADD_COLOR";
+export const UPDATE_COLOR = "UPDATE_COLOR";
+export const DELETE_COLOR = "DELETE_COLOR";
+export const COLOR_LOADING = "COLOR_LOADING";

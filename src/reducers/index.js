@@ -1,12 +1,11 @@
-import { combineReducers } from 'redux';
-import authReducer from './authReducer';
-import errorReducer from './errorReducer';
-import fabricantReducer from './fabricantReducer';
+import { combineReducers } from "redux";
+import authReducer from "./authReducer";
+import errorReducer from "./errorReducer";
+import fabricantReducer from "./fabricantReducer";
 import userReducer from "./userReducer";
 import brandReducer from "./brandReducer";
-import modelReducer from './modelReducer';
-
-
+import modelReducer from "./modelReducer";
+import colorReducer from "./colorReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -14,5 +13,6 @@ export default combineReducers({
   fabricant: fabricantReducer,
   user: userReducer,
   brand: brandReducer,
+  color: colorReducer,
   model: modelReducer
 });
