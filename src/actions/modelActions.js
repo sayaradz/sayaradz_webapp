@@ -37,6 +37,7 @@ export const getBrand = marqueId => dispatch => {
   axios
     .get(`${process.env.REACT_APP_BACKEND_URL}/brands/${marqueId}`)
     .then(res =>{
+      console.log("get brands:", res.data);
       dispatch({
         type: GET_MODELS,
         payload: res.data
@@ -45,7 +46,7 @@ export const getBrand = marqueId => dispatch => {
     )
     .catch(err =>
       dispatch({
-        type: GET_MODELS,
+        type: GET_ERRORS,
         payload: null
       })
     )
@@ -131,6 +132,18 @@ export const deleteModel = id => dispatch => {
     );
 };
 
+export const setCurrentModel = modelId=> dispatch =>{
+  axios
+    .get(`${process.env.REACT_APP_BACKEND_URL}/models/${modelId}`)
+    .then(model => {
+      console.log(model.data)
+      dispatch( {
+        type: SET_CURRENT_MODEL,
+        payload: model.data
+      })
+    })
+};
+
 // Set loading state
 export const setModelLoading = () => {
   return {
@@ -145,9 +158,4 @@ export const clearErrors = () => {
   };
 };
 
-export const setCurrentModel = model=> {
-  return {
-    type: SET_CURRENT_MODEL,
-    payload: model
-  }
-}
+

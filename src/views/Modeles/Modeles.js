@@ -72,9 +72,26 @@ function ModelRow(props) {
 }
 
 class Modeles extends Component {
+  columns = [
+    {
+      dataField: "code",
+      text: "Code"
+    },
+    {
+      dataField: "name",
+      text: "Nom"
+    },
+    {
+      dataField: "df1",
+      isDummyField: true,
+      text: "Opérations",
+      formatter: this.operationFormatter,
+      formatExtraData: this
+    }
+  ];
   componentDidMount() {
     //this.props.getModels();
-    this.props.getBrand(this.props.match.params.id);
+    this.props.getBrand("5d0e64dd6c5d750017f46454");
   }
 
   render() {
@@ -92,6 +109,7 @@ class Modeles extends Component {
     } else {
       var current_model = this.props.model.current_model;
       const versions = current_model.versions;
+      console.log("current model", current_model);
       const marque = this.props.model.brand.name;
       return (
         <div className="animated fadeIn">
@@ -116,7 +134,7 @@ class Modeles extends Component {
                           model={model}
                           handleDelete={this.props.deleteModel}
                           key={model._id}
-                          onClick={() => this.props.setCurrentModel(model)}
+                          onClick={() => this.props.setCurrentModel(model._id)}
                         />
                       ))}
                     </tbody>
