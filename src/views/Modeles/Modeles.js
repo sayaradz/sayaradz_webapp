@@ -8,8 +8,9 @@ import {
   CardHeader,
   Col,
   Row,
-  Table
 } from "reactstrap";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+
 import Spinner from "../common/Spinner";
 import ModelModal from "./ModelModal";
 import {
@@ -26,50 +27,15 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 
 import { ADD_VERSION, UPDATE_MODEL } from "../../actions/types";
 import VersionModal from "./VersionModal";
+import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import filterFactory from "react-bootstrap-table2-filter";
 
-const handleDelete = (props, model) => {
-  confirmAlert({
-    title: "Confirmation",
-    message: "Etes-vous sure de vouloir supprimer ce modèle ?",
-    buttons: [
-      {
-        label: "Oui",
-        onClick: () => props.handleDelete(model._id)
-      },
-      {
-        label: "Non",
-        onClick: () => {}
-      }
-    ]
-  });
+const style = {
+  overflowX: "scroll"
 };
 
-function ModelRow(props) {
-  const model = props.model;
-  return (
-    <tr onClick={props.onClick}>
-      <td>{model.code}</td>
-      <td>{model.name}</td>
-      <td style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          className="float-left mr-1"
-          color="danger"
-          onClick={() => handleDelete(props, model)}
-        >
-          <i className="fa fa-spinnerde fa-trash" />
-        </Button>
-        <ModelModal
-          id={model._id}
-          type={UPDATE_MODEL}
-          name={model.name}
-          code={model.code}
-          btnColor="warning"
-          btnText="&#9998;"
-        />
-      </td>
-    </tr>
-  );
-}
+const { SearchBar } = Search;
 
 class Modeles extends Component {
   columns = [
@@ -90,11 +56,59 @@ class Modeles extends Component {
     }
   ];
   componentDidMount() {
-    //this.props.getModels();
     this.props.getBrand("5d0e64dd6c5d750017f46454");
   }
 
+  operationFormatter(cell, row, index, extra) {
+    return (
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Button
+          className="float-left mr-1"
+          color="danger"
+          onClick={() => extra.handleDelete(extra.props, row)}
+        >
+          <i className="fa fa-spinnerde fa-trash" />
+        </Button>
+        <ModelModal
+          id={row._id}
+          type={false}
+          name={row.name}
+          code={row.code}
+          btnColor="warning"
+          btnText="&#9998;"
+        />
+      </div>
+    );
+  }
+
+  handleDelete = (props, model) => {
+    confirmAlert({
+      title: "Confirmation",
+      message: "Etes-vous sure de vouloir supprimer ce modèle ?",
+      buttons: [
+        {
+          label: "Oui",
+          onClick: () => props.deleteModel(model._id)
+        },
+        {
+          label: "Non",
+          onClick: () => {}
+        }
+      ]
+    });
+  };
+
+  handleOnSelect = (row, isSelect) => {
+    this.props.setCurrentModel(row._id);
+    console.log(row)
+  };
+
   render() {
+    const selectRow = {
+      mode: 'radio',
+      clickToSelect: true,
+      onSelect: this.handleOnSelect
+    }
     const { models, loading } = this.props.model;
     if (!models || loading) {
       return (
@@ -109,7 +123,6 @@ class Modeles extends Component {
     } else {
       var current_model = this.props.model.current_model;
       const versions = current_model.versions;
-      console.log("current model", current_model);
       const marque = this.props.model.brand.name;
       return (
         <div className="animated fadeIn">
@@ -119,26 +132,58 @@ class Modeles extends Component {
                 <CardHeader>
                   <i className="fa fa-align-justify" /> Modèles
                 </CardHeader>
-                <CardBody>
-                  <Table responsive hover>
-                    <thead>
-                      <tr>
-                        <th scope="col">Code</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col" />
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {models.map(model => (
-                        <ModelRow
-                          model={model}
-                          handleDelete={this.props.deleteModel}
-                          key={model._id}
-                          onClick={() => this.props.setCurrentModel(model._id)}
+                <CardBody style={style}>
+                  <ToolkitProvider
+                    keyField="_id"
+                    data={models}
+                    columns={this.columns}
+                    search
+                  >
+                    {props => (
+                      <div>
+                        {/* <ExportCSVButton {...props.csvProps}>
+                          Export CSV!!
+                        </ExportCSVButton> */}
+                        <hr />
+                        <h3>Rechercher un Modèle:</h3>
+                        <SearchBar {...props.searchProps} />
+                        <hr />
+                        <BootstrapTable
+                          {...props.baseProps}
+                          keyField="_id"
+                          columns={this.columns}
+                          data={models}
+                          pagination={paginationFactory()}
+                          filter={filterFactory()}
+                          selectRow={selectRow}
+                          className="table-responsive"
+                          striped
+                          hover
+                          condensed
+                          responsive
                         />
-                      ))}
-                    </tbody>
-                  </Table>
+                      </div>
+                    )}
+                  </ToolkitProvider>
+                  {/*<Table responsive hover>*/}
+                    {/*<thead>*/}
+                      {/*<tr>*/}
+                        {/*<th scope="col">Code</th>*/}
+                        {/*<th scope="col">Nom</th>*/}
+                        {/*<th scope="col" />*/}
+                      {/*</tr>*/}
+                    {/*</thead>*/}
+                    {/*<tbody>*/}
+                      {/*{models.map(model => (*/}
+                        {/*<ModelRow*/}
+                          {/*model={model}*/}
+                          {/*handleDelete={this.props.deleteModel}*/}
+                          {/*key={model._id}*/}
+                          {/*onClick={() => this.props.setCurrentModel(model._id)}*/}
+                        {/*/>*/}
+                      {/*))}*/}
+                    {/*</tbody>*/}
+                  {/*</Table>*/}
                 </CardBody>
               </Card>
               <Row>
