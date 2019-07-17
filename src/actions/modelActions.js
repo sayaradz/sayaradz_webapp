@@ -7,7 +7,8 @@ import {
   ADD_MODEL,
   DELETE_MODEL,
   MODEL_LOADING,
-  CLEAR_ERRORS, SET_CURRENT_MODEL
+  CLEAR_ERRORS,
+  SET_CURRENT_MODEL
 } from "./types";
 
 // Get Modeles
@@ -36,20 +37,19 @@ export const getBrand = marqueId => dispatch => {
 
   axios
     .get(`${process.env.REACT_APP_BACKEND_URL}/brands/${marqueId}`)
-    .then(res =>{
+    .then(res => {
       console.log("get brands:", res.data);
       dispatch({
         type: GET_MODELS,
         payload: res.data
-      })
-      }
-    )
+      });
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: null
       })
-    )
+    );
 };
 
 // Add Model
@@ -58,46 +58,54 @@ export const addModel = modelData => dispatch => {
   axios
     .post(`${process.env.REACT_APP_BACKEND_URL}/models`, modelData)
     .then(res => {
-      console.log(res)
-      axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}/brands/5d0e64dd6c5d750017f46454/models`, {model_id: res.data._id})
+      console.log(res);
+      axios.post(
+        `${
+          process.env.REACT_APP_BACKEND_URL
+        }/brands/5d0e64dd6c5d750017f46454/models`,
+        { model_id: res.data._id }
+      );
       dispatch({
         type: ADD_MODEL,
         payload: res.data
-      })
-    }
-    )
+      });
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
     );
-
 };
 
 // Add Versions
 export const addVersion = versionData => dispatch => {
   dispatch(clearErrors());
-  axios.
-  post(`${process.env.REACT_APP_BACKEND_URL}/versions`, versionData.version)
+  axios
+    .post(`${process.env.REACT_APP_BACKEND_URL}/versions`, versionData.version)
     .then(res => {
       axios
-        .post(`${process.env.REACT_APP_BACKEND_URL}/models/${versionData.modelId}/versions`,
-          {version_id: res.data._id}
+        .post(
+          `${process.env.REACT_APP_BACKEND_URL}/models/${
+            versionData.modelId
+          }/versions`,
+          { version_id: res.data._id }
         )
         .then(res => {
           axios
-            .get(`${process.env.REACT_APP_BACKEND_URL}/models/${versionData.modelId}`)
+            .get(
+              `${process.env.REACT_APP_BACKEND_URL}/models/${
+                versionData.modelId
+              }`
+            )
             .then(res => {
               dispatch({
                 type: ADD_VERSION,
                 payload: res.data
-              })
-            })
-        })
-    })
-  ;
+              });
+            });
+        });
+    });
   /*axios
     .post(`${process.env.REACT_APP_BACKEND_URL}/models/:modelId/versions`, versionData)
     .then(res =>
@@ -132,16 +140,16 @@ export const deleteModel = id => dispatch => {
     );
 };
 
-export const setCurrentModel = modelId=> dispatch =>{
+export const setCurrentModel = modelId => dispatch => {
   axios
     .get(`${process.env.REACT_APP_BACKEND_URL}/models/${modelId}`)
     .then(model => {
-      console.log(model.data)
-      dispatch( {
+      console.log(model.data);
+      dispatch({
         type: SET_CURRENT_MODEL,
         payload: model.data
-      })
-    })
+      });
+    });
 };
 
 // Set loading state
@@ -157,5 +165,3 @@ export const clearErrors = () => {
     type: CLEAR_ERRORS
   };
 };
-
-

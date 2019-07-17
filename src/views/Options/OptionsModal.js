@@ -62,7 +62,7 @@ class OptionsModal extends Component {
   render() {
     return (
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button option={this.props.btnColor} onClick={this.toggle}>
+        <Button color={this.props.btnColor} onClick={this.toggle}>
           {this.props.btnText}
         </Button>
         <Modal
@@ -102,7 +102,7 @@ class OptionsModal extends Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <Button form="form1" type="submit" size="lg" option="primary">
+            <Button form="form1" type="submit" size="lg" color="primary">
               Soumettre
             </Button>
           </ModalFooter>

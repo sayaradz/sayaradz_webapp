@@ -26,6 +26,13 @@ class Colors extends Component {
   }
   columns = [
     {
+      dataField: "value",
+      text: "Couleur",
+      formatter: (cell, row) => (
+        <img width="75px" height="75px" src={cell} alt={row.name} />
+      )
+    },
+    {
       dataField: "code",
       text: "Code"
     },

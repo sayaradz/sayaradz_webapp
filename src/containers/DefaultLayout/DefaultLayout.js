@@ -3,7 +3,7 @@ import { Redirect, Switch } from "react-router-dom";
 import { Container } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { logoutUser, setCurrentUser } from "../../actions/authActions";
+import { logoutUser } from "../../actions/authActions";
 import PrivateRoute from "../../views/common/PrivateRoute";
 // import Fabricants from "../../views/Fabricants/Fabricants";
 // import jwt_decode from "jwt-decode";
@@ -53,9 +53,9 @@ class DefaultLayout extends Component {
 
   componentWillMount = () => {
     // SET NAVIGATION ACCORDING TO USER ROLE
-    if (this.props.auth.user.role == "admin") {
+    if (this.props.auth.user.role === "admin") {
       navigation = admin_navigation;
-    } else if (this.props.auth.user.role == "manufacturer") {
+    } else if (this.props.auth.user.role === "manufacturer") {
       navigation = manifacturer_nav;
     } else {
       console.log("Unauthorized user role");

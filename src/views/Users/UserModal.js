@@ -71,7 +71,6 @@ class UserModal extends Component {
   }
 
   render() {
-    const { user } = this.state;
     const title = this.state.type
       ? "Ajouter utilisateur"
       : "Mettre à jour utilisateur";

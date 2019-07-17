@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   FormGroup,
   Input,
-  FormText,
   Label,
   Form,
   Button,
@@ -54,7 +53,7 @@ class ModelModal extends Component {
     e.preventDefault();
     const model = {
       name: this.state.name,
-      code: this.state.code,
+      code: this.state.code
     };
     if (id !== "") {
     } else {
@@ -112,7 +111,7 @@ class ModelModal extends Component {
   }
 }
 ModelModal.propTypes = {
-  addModel: PropTypes.func.isRequired,
+  addModel: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({});

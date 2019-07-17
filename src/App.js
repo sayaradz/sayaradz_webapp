@@ -5,7 +5,6 @@ import Loadable from "react-loadable";
 import "./App.scss";
 
 import PrivateRoute from "./views/common/PrivateRoute";
-import { setCurrentUser, logoutUser } from "./actions/authActions";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { Provider } from "react-redux";

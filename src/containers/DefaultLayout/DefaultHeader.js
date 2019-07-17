@@ -1,41 +1,32 @@
-import React, { Component } from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import {
-  Badge,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Nav,
-  NavItem
-} from 'reactstrap'
-import PropTypes from 'prop-types'
+import React, { Component } from "react";
+import { DropdownItem, DropdownMenu, DropdownToggle, Nav } from "reactstrap";
+import PropTypes from "prop-types";
 
 import {
-  AppAsideToggler,
   AppHeaderDropdown,
   AppNavbarBrand,
   AppSidebarToggler
-} from '@coreui/react'
-import logo from '../../assets/img/brand/logo.png'
-import sygnet from '../../assets/img/brand/sygnet.png'
+} from "@coreui/react";
+import logo from "../../assets/img/brand/logo.png";
+import sygnet from "../../assets/img/brand/sygnet.png";
 
 const propTypes = {
   children: PropTypes.node
-}
+};
 
-const defaultProps = {}
+const defaultProps = {};
 
 class DefaultHeader extends Component {
   render() {
     // eslint-disable-next-line
-    const { children, ...attributes } = this.props
+    const { children, ...attributes } = this.props;
 
     return (
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
         <AppNavbarBrand
-          full={{ src: logo, width: 150, height: 65, alt: 'CoreUI Logo' }}
-          minimized={{ src: sygnet, width: 30, height: 30, alt: 'CoreUI Logo' }}
+          full={{ src: logo, width: 150, height: 65, alt: "CoreUI Logo" }}
+          minimized={{ src: sygnet, width: 30, height: 30, alt: "CoreUI Logo" }}
         />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 
@@ -72,12 +63,12 @@ class DefaultHeader extends Component {
           <AppHeaderDropdown direction="down">
             <DropdownToggle nav>
               <img
-                src={'../../assets/img/avatars/9.jpg'}
+                src={"../../assets/img/avatars/9.jpg"}
                 className="img-avatar"
                 alt="admin@bootstrapmaster.com"
               />
             </DropdownToggle>
-            <DropdownMenu right style={{ right: 'auto' }}>
+            <DropdownMenu right style={{ right: "auto" }}>
               {/* <DropdownItem header tag="div" className="text-center">
                 <strong>Account</strong>
               </DropdownItem>
@@ -127,11 +118,11 @@ class DefaultHeader extends Component {
         {/* <AppAsideToggler className="d-md-down-none" />
         <AppAsideToggler className="d-lg-none" mobile /> */}
       </React.Fragment>
-    )
+    );
   }
 }
 
-DefaultHeader.propTypes = propTypes
-DefaultHeader.defaultProps = defaultProps
+DefaultHeader.propTypes = propTypes;
+DefaultHeader.defaultProps = defaultProps;
 
-export default DefaultHeader
+export default DefaultHeader;

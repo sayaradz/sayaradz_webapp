@@ -179,7 +179,7 @@ class Modeles extends Component {
                   <h1>Fabriquant : {current_model.name}</h1>
                   <h1>Versions : </h1>
                   <ul>
-                    {versions != undefined &&
+                    {versions !== undefined &&
                       versions.map(version => {
                         return (
                           <li key={version._id}>

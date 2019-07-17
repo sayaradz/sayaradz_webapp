@@ -23,6 +23,7 @@ class ColorsModal extends Component {
       type: this.props.type ? "Ajouter" : "Mettre à jour",
       name: this.props.name,
       code: this.props.code,
+      value: this.props.value,
       error: ""
     };
 
@@ -48,6 +49,7 @@ class ColorsModal extends Component {
     e.preventDefault();
     const color = {
       name: this.state.name,
+      value: this.state.value,
       code: this.state.code
     };
     if (this.props.type) {
@@ -55,7 +57,7 @@ class ColorsModal extends Component {
       this.setState({ modal: false });
     } else {
       this.props.updateColor(id, color);
-      this.setState({ name: "", code: "", modal: false });
+      this.setState({ name: "", code: "", value: "", modal: false });
     }
   }
 
@@ -76,6 +78,15 @@ class ColorsModal extends Component {
           <ModalBody>
             <Form id="form1" onSubmit={this.onSubmit}>
               <FormGroup>
+                <Label htmlFor="value">Couleur</Label>
+                <Input
+                  type="text"
+                  id="value"
+                  name="value"
+                  value={this.state.value}
+                  onChange={this.onChange}
+                  placeholder="La couleur.."
+                />
                 <Label htmlFor="name">Nom</Label>
                 <Input
                   type="text"

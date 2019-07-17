@@ -14,7 +14,7 @@ import {
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addModel, updateModel } from "../../actions/brandActions";
-import { ADD_VERSION, UPDATE_MODEL } from "../../actions/types";
+import { ADD_VERSION } from "../../actions/types";
 
 class BrandModal extends Component {
   constructor(props) {

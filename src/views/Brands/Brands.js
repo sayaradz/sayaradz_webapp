@@ -18,7 +18,7 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import filterFactory from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
-import { ADD_BRAND, UPDATE_BRAND } from "../../actions/types";
+import { UPDATE_BRAND } from "../../actions/types";
 
 const { SearchBar } = Search;
 

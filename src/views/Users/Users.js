@@ -13,7 +13,6 @@ import Spinner from "../common/Spinner";
 import UserModal from "./UserModal";
 import { getUsers, deleteUser } from "../../actions/userAction";
 import { connect } from "react-redux";
-import { ADD_USER } from "../../actions/types";
 
 function UserRow(props) {
   const user = props.user;
