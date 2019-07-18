@@ -14,23 +14,35 @@ import {
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addModel, updateModel } from "../../actions/brandActions";
+import { getFabricants, updateFabricant } from "../../actions/fabricantActions";
 import { ADD_VERSION } from "../../actions/types";
+import { UPDATE_BRAND, ADD_BRAND } from "../../actions/types";
 
 class BrandModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       modal: false,
-      type: this.props.type === ADD_VERSION ? "Ajouter" : "Mettre à jour",
+      type: this.props.type === ADD_BRAND ? "Ajouter" : "Mettre à jour",
       name: this.props.name,
       code: this.props.code,
       logo: this.props.logo,
+      fabId: this.props.fabId,
+      fabricant: "",
+      fabricants: [],
       error: ""
     };
 
     this.toggle = this.toggle.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getFabricants();
+    this.setState({
+      fabricants: this.props.fabricant.fabricants
+    });
   }
 
   toggle() {
@@ -64,6 +76,17 @@ class BrandModal extends Component {
       this.props.addBrand(brand);
       this.setState({ name: "", code: "", logo: "", modal: false });
     }
+    const brandId = this.props.id;
+    // Delete brand from the old manufacturer's brands list
+    const oldFabId = this.state.fabId;
+    let oldFab = this.state.fabricants.find(f => f._id === oldFabId);
+    oldFab.brands = oldFab.brands.filter(b => b !== brandId);
+    this.props.updateFabricant(oldFabId, oldFab);
+    //Add brand to the selected manufacturer's brands list
+    const newFabId = this.state.fabricant;
+    let fab = this.state.fabricants.find(f => f._id === newFabId);
+    fab.brands.push(brandId);
+    this.props.updateFabricant(newFabId, fab);
   }
 
   render() {
@@ -101,6 +124,21 @@ class BrandModal extends Component {
                   onChange={this.onChange}
                   placeholder="Code de la marque.."
                 />
+                <Label htmlFor="fabricant">Fabricant</Label>
+                <Input
+                  type="select"
+                  name="fabricant"
+                  id="fabricant"
+                  onChange={this.onChange}
+                  placeholder="Le fabricant propiétaire.."
+                >
+                  {this.state.fabricants.map(f => (
+                    <option key={f._id} value={f._id}>
+                      {f.name}
+                    </option>
+                  ))}
+                </Input>
+
                 <Label htmlFor="logo">Logo</Label>
                 <Input
                   type="text"
@@ -128,12 +166,22 @@ class BrandModal extends Component {
 }
 BrandModal.propTypes = {
   addBrand: PropTypes.func.isRequired,
-  updateBrand: PropTypes.func.isRequired
+  updateBrand: PropTypes.func.isRequired,
+  getFabricants: PropTypes.func.isRequired,
+  updateFabricant: PropTypes.func.isRequired,
+  fabricant: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  fabricant: state.fabricant
+});
 
 export default connect(
   mapStateToProps,
-  { addBrand: addModel, updateBrand: updateModel }
+  {
+    addBrand: addModel,
+    updateBrand: updateModel,
+    getFabricants,
+    updateFabricant
+  }
 )(BrandModal);

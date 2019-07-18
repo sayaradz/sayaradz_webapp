@@ -1,14 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Row,
-} from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 import Spinner from "../common/Spinner";
@@ -25,7 +18,7 @@ import "react-notifications/lib/notifications.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
-import { ADD_VERSION, UPDATE_MODEL } from "../../actions/types";
+import { ADD_VERSION } from "../../actions/types";
 import VersionModal from "./VersionModal";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
@@ -100,15 +93,15 @@ class Modeles extends Component {
 
   handleOnSelect = (row, isSelect) => {
     this.props.setCurrentModel(row._id);
-    console.log(row)
+    console.log(row);
   };
 
   render() {
     const selectRow = {
-      mode: 'radio',
+      mode: "radio",
       clickToSelect: true,
       onSelect: this.handleOnSelect
-    }
+    };
     const { models, loading } = this.props.model;
     if (!models || loading) {
       return (
@@ -166,23 +159,23 @@ class Modeles extends Component {
                     )}
                   </ToolkitProvider>
                   {/*<Table responsive hover>*/}
-                    {/*<thead>*/}
-                      {/*<tr>*/}
-                        {/*<th scope="col">Code</th>*/}
-                        {/*<th scope="col">Nom</th>*/}
-                        {/*<th scope="col" />*/}
-                      {/*</tr>*/}
-                    {/*</thead>*/}
-                    {/*<tbody>*/}
-                      {/*{models.map(model => (*/}
-                        {/*<ModelRow*/}
-                          {/*model={model}*/}
-                          {/*handleDelete={this.props.deleteModel}*/}
-                          {/*key={model._id}*/}
-                          {/*onClick={() => this.props.setCurrentModel(model._id)}*/}
-                        {/*/>*/}
-                      {/*))}*/}
-                    {/*</tbody>*/}
+                  {/*<thead>*/}
+                  {/*<tr>*/}
+                  {/*<th scope="col">Code</th>*/}
+                  {/*<th scope="col">Nom</th>*/}
+                  {/*<th scope="col" />*/}
+                  {/*</tr>*/}
+                  {/*</thead>*/}
+                  {/*<tbody>*/}
+                  {/*{models.map(model => (*/}
+                  {/*<ModelRow*/}
+                  {/*model={model}*/}
+                  {/*handleDelete={this.props.deleteModel}*/}
+                  {/*key={model._id}*/}
+                  {/*onClick={() => this.props.setCurrentModel(model._id)}*/}
+                  {/*/>*/}
+                  {/*))}*/}
+                  {/*</tbody>*/}
                   {/*</Table>*/}
                 </CardBody>
               </Card>
