@@ -14,9 +14,8 @@ import {
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { addModel, updateModel } from "../../actions/brandActions";
-import { getFabricants, updateFabricant } from "../../actions/fabricantActions";
-import { ADD_VERSION } from "../../actions/types";
-import { UPDATE_BRAND, ADD_BRAND } from "../../actions/types";
+import { getFabricants } from "../../actions/fabricantActions";
+import { ADD_BRAND } from "../../actions/types";
 
 class BrandModal extends Component {
   constructor(props) {
@@ -27,7 +26,6 @@ class BrandModal extends Component {
       name: this.props.name,
       code: this.props.code,
       logo: this.props.logo,
-      fabId: this.props.fabId,
       fabricant: "",
       fabricants: [],
       error: ""
@@ -61,32 +59,37 @@ class BrandModal extends Component {
       [e.target.name]: e.target.value
     });
   }
+
+  getFabs(brandId) {
+    let fab = [];
+    fab = this.state.fabricants.map(f => {
+      if (f.brands.find(b => b._id === brandId)) return f;
+      else return null;
+    });
+    return fab;
+  }
   onSubmit(e) {
-    const id = this.props.id;
     e.preventDefault();
     const brand = {
       name: this.state.name,
       code: this.state.code,
       logo: this.state.logo
     };
-    if (id !== "") {
-      this.props.updateBrand(id, brand);
+    //select brand ID
+    const brandId = this.props.id;
+    //select new fab ID
+    const newFabId = this.state.fabricant;
+    if (brandId !== "") {
+      // Delete brand from the old manufacturer's brands list
+      // select brand old fabricants (in case there is many)
+      let oldFabs = this.getFabs(brandId);
+      this.props.updateBrand(brandId, brand, oldFabs, newFabId);
       this.setState({ modal: false });
     } else {
-      this.props.addBrand(brand);
+      //Create new brand with the new Fab
+      this.props.addBrand(brand, newFabId);
       this.setState({ name: "", code: "", logo: "", modal: false });
     }
-    const brandId = this.props.id;
-    // Delete brand from the old manufacturer's brands list
-    const oldFabId = this.state.fabId;
-    let oldFab = this.state.fabricants.find(f => f._id === oldFabId);
-    oldFab.brands = oldFab.brands.filter(b => b !== brandId);
-    this.props.updateFabricant(oldFabId, oldFab);
-    //Add brand to the selected manufacturer's brands list
-    const newFabId = this.state.fabricant;
-    let fab = this.state.fabricants.find(f => f._id === newFabId);
-    fab.brands.push(brandId);
-    this.props.updateFabricant(newFabId, fab);
   }
 
   render() {
@@ -168,7 +171,8 @@ BrandModal.propTypes = {
   addBrand: PropTypes.func.isRequired,
   updateBrand: PropTypes.func.isRequired,
   getFabricants: PropTypes.func.isRequired,
-  updateFabricant: PropTypes.func.isRequired,
+  addFabBrand: PropTypes.func.isRequired,
+  deleteFabBrand: PropTypes.func.isRequired,
   fabricant: PropTypes.object.isRequired
 };
 
@@ -181,7 +185,6 @@ export default connect(
   {
     addBrand: addModel,
     updateBrand: updateModel,
-    getFabricants,
-    updateFabricant
+    getFabricants
   }
 )(BrandModal);

@@ -35,14 +35,14 @@ const style = {
   overflowX: "scroll"
 };
 
-const handleDelete = (props, brand) => {
+const handleDelete = (props, brand, oldFabs) => {
   confirmAlert({
     title: "Confirmation",
     message: "Etes-vous sure de vouloir supprimer cette marque ?",
     buttons: [
       {
         label: "Oui",
-        onClick: () => props.deleteBrand(brand._id)
+        onClick: () => props.rowHandleDelete(brand._id, oldFabs)
       },
       {
         label: "Non",
@@ -56,9 +56,13 @@ function BrandRow(props) {
   let count = 0,
     fabricants = props.fabricants;
   const brand = props.brand,
-    fab = fabricants.find(f => f.brands.includes(brand._id)),
-    fabName = fab ? fab.name : "",
-    fabId = fab ? fab._id : "";
+    fab = fabricants.find(f => f.brands.find(b => b._id === brand._id)),
+    fabName = fab ? fab.name : "";
+  //Get all old fabricants that were attributed to brand
+  let oldFabs = fabricants.map(f => {
+    if (f.brands.find(b => b._id === brand._id)) return f;
+    else return null;
+  });
   return (
     <tr key={count++}>
       <td>
@@ -71,7 +75,7 @@ function BrandRow(props) {
         <Button
           className="float-left mr-1"
           color="danger"
-          onClick={() => handleDelete(props, brand)}
+          onClick={() => handleDelete(props, brand, oldFabs)}
         >
           <i className="fa fa-spinner fa-trash" />
         </Button>
@@ -81,7 +85,6 @@ function BrandRow(props) {
           name={brand.name}
           code={brand.code}
           logo={brand.logo}
-          fabId={fabId}
           btnColor="warning"
           btnText="&#9998;"
         />
@@ -185,8 +188,9 @@ class Brands extends Component {
                         <BrandRow
                           key={brand._id}
                           brand={brand}
+                          getFabricants={this.props.getFabricants}
                           fabricants={fabricants}
-                          handleDelete={this.props.deleteBrand}
+                          rowHandleDelete={this.props.deleteBrand}
                         />
                       ))}
                     </tbody>
@@ -286,7 +290,8 @@ Brands.propTypes = {
   getBrands: PropTypes.func.isRequired,
   deleteBrand: PropTypes.func.isRequired,
   getFabricants: PropTypes.func.isRequired,
-  brand: PropTypes.object
+  brand: PropTypes.object.isRequired,
+  fabricant: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

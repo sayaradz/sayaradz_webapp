@@ -14,6 +14,8 @@ export const DELETE_FABRICANT_USER = "DELETE_FABRICANT_USER";
 
 export const ADD_FABRICANT = "ADD_FABRICANT";
 export const UPDATE_FABRICANT = "UPDATE_FABRICANT";
+export const ADD_FAB_BRAND = "ADD_FAB_BRAND";
+export const DELETE_FAB_BRAND = "DELETE_FAB_BRAND";
 
 export const GET_BRANDS = "GET_BRANDS";
 export const GET_MODEL = "GET_MODEL";

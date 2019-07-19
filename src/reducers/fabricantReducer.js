@@ -4,7 +4,9 @@ import {
   GET_USER,
   UPDATE_USER,
   DELETE_USER,
-  USER_LOADING
+  USER_LOADING,
+  ADD_FAB_BRAND,
+  DELETE_FAB_BRAND
 } from "../actions/types";
 import { NotificationManager } from "react-notifications";
 
@@ -57,6 +59,20 @@ export default function(state = initialState, action) {
       return {
         ...state,
         fabricants: [action.payload, ...state.fabricants]
+      };
+    case ADD_FAB_BRAND:
+      return {
+        ...state,
+        fabricants: [
+          ...state.fabricants.map(f => {
+            if (f._id === action.payload._id) return action.payload;
+            else return f;
+          })
+        ]
+      };
+    case DELETE_FAB_BRAND:
+      return {
+        ...state
       };
     case DELETE_USER:
       NotificationManager.success(
