@@ -1,15 +1,15 @@
 import axios from "axios";
 
 import {
-  ADD_VERSION,
-  UPDATE_MODEL,
+  GET_BRANDS,
+  GET_BRAND,
+  DELETE_BRAND,
+  ADD_BRAND,
+  UPDATE_BRAND,
   GET_ERRORS,
   CLEAR_ERRORS,
-  GET_BRANDS,
-  GET_MODEL,
-  DELETE_BRAND,
   MODEL_LOADING,
-  GET_USERS
+  GET_FABRICANTS
 } from "./types";
 
 // Add BRAND
@@ -30,14 +30,14 @@ export const addModel = (brandData, fabId) => dispatch => {
             .get(`${process.env.REACT_APP_BACKEND_URL}/manufacturers`)
             .then(res =>
               dispatch({
-                type: GET_USERS,
+                type: GET_FABRICANTS,
                 payload: res.data.rows
               })
             )
             .catch(err =>
               dispatch({
-                type: GET_USERS,
-                payload: null
+                type: GET_ERRORS,
+                payload: err.response.data
               })
             );
         })
@@ -49,7 +49,7 @@ export const addModel = (brandData, fabId) => dispatch => {
         );
       //New brand dispatch to state
       dispatch({
-        type: ADD_VERSION,
+        type: ADD_BRAND,
         payload: res.data
       });
     })
@@ -78,8 +78,8 @@ export const updateModel = (id, brandData, oldFab, newFabId) => dispatch => {
             )
             .catch(err =>
               dispatch({
-                type: GET_USERS,
-                payload: null
+                type: GET_ERRORS,
+                payload: err.response.data
               })
             );
       });
@@ -95,14 +95,14 @@ export const updateModel = (id, brandData, oldFab, newFabId) => dispatch => {
           .get(`${process.env.REACT_APP_BACKEND_URL}/manufacturers`)
           .then(res =>
             dispatch({
-              type: GET_USERS,
+              type: GET_FABRICANTS,
               payload: res.data.rows
             })
           )
           .catch(err =>
             dispatch({
-              type: GET_USERS,
-              payload: null
+              type: GET_ERRORS,
+              payload: err.response.data
             })
           );
       })
@@ -118,7 +118,7 @@ export const updateModel = (id, brandData, oldFab, newFabId) => dispatch => {
     .put(`${process.env.REACT_APP_BACKEND_URL}/brands/${id}`, brandData)
     .then(res =>
       dispatch({
-        type: UPDATE_MODEL,
+        type: UPDATE_BRAND,
         payload: res.data
       })
     )
@@ -143,7 +143,7 @@ export const getBrands = () => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: null
+        payload: err.response.data
       })
     );
 };
@@ -155,14 +155,14 @@ export const getBrand = id => dispatch => {
     .get(`${process.env.REACT_APP_BACKEND_URL}/brands/${id}`)
     .then(res =>
       dispatch({
-        type: GET_MODEL,
+        type: GET_BRAND,
         payload: res.data
       })
     )
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
-        payload: null
+        payload: err.response.data
       })
     );
 };
@@ -179,10 +179,27 @@ export const deleteBrand = (id, oldFabs) => dispatch => {
               fab._id
             }/brands/${id}`
           )
+          .then(() => {
+            //Get fabricants list
+            axios
+              .get(`${process.env.REACT_APP_BACKEND_URL}/manufacturers`)
+              .then(res =>
+                dispatch({
+                  type: GET_FABRICANTS,
+                  payload: res.data.rows
+                })
+              )
+              .catch(err =>
+                dispatch({
+                  type: GET_ERRORS,
+                  payload: err.response.data
+                })
+              );
+          })
           .catch(err =>
             dispatch({
-              type: GET_USERS,
-              payload: null
+              type: GET_ERRORS,
+              payload: err.response.data
             })
           );
     });

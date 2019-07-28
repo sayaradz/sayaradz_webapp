@@ -1,12 +1,10 @@
 import {
-  ADD_USER,
-  GET_USERS,
-  GET_USER,
-  UPDATE_USER,
-  DELETE_USER,
-  USER_LOADING,
-  ADD_FAB_BRAND,
-  DELETE_FAB_BRAND
+  ADD_FABRICANT,
+  UPDATE_FABRICANT,
+  GET_FABRICANTS,
+  GET_FABRICANT,
+  DELETE_FABRICANT,
+  USER_LOADING
 } from "../actions/types";
 import { NotificationManager } from "react-notifications";
 
@@ -23,19 +21,19 @@ export default function(state = initialState, action) {
         ...state,
         loading: true
       };
-    case GET_USERS:
+    case GET_FABRICANTS:
       return {
         ...state,
         fabricants: action.payload,
         loading: false
       };
-    case GET_USER:
+    case GET_FABRICANT:
       return {
         ...state,
         fabricant: action.payload,
         loading: false
       };
-    case UPDATE_USER:
+    case UPDATE_FABRICANT:
       NotificationManager.success(
         "Mise à jour éffectuée avec succés",
         "Mise à jour"
@@ -47,34 +45,15 @@ export default function(state = initialState, action) {
             if (f._id === action.payload._id) return action.payload;
             else return f;
           })
-
-          // action.payload,
-          // ...state.fabricants.filter(
-          //   fabricant => fabricant._id !== action.payload._id
-          // )
         ]
       };
-    case ADD_USER:
+    case ADD_FABRICANT:
       NotificationManager.success("Ajout éffectué avec succés", "Ajout");
       return {
         ...state,
         fabricants: [action.payload, ...state.fabricants]
       };
-    case ADD_FAB_BRAND:
-      return {
-        ...state,
-        fabricants: [
-          ...state.fabricants.map(f => {
-            if (f._id === action.payload._id) return action.payload;
-            else return f;
-          })
-        ]
-      };
-    case DELETE_FAB_BRAND:
-      return {
-        ...state
-      };
-    case DELETE_USER:
+    case DELETE_FABRICANT:
       NotificationManager.success(
         "Suppression éffectuée avec succés",
         "Suppression"

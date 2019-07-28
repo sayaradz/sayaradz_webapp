@@ -63,6 +63,7 @@ class BrandModal extends Component {
   getFabs(brandId) {
     let fab = [];
     fab = this.state.fabricants.map(f => {
+      //(Next time use filter method instead of map)
       if (f.brands.find(b => b._id === brandId)) return f;
       else return null;
     });

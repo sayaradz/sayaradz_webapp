@@ -1,34 +1,44 @@
 import {
   DELETE_FABRICANT_USER,
-  GET_ERRORS,
+  UPDATE_FABRICANT_USER,
   GET_FABRICANT_USERS,
+  ADD_FABRICANT_USER,
+  GET_ERRORS,
   USER_LOADING,
-  CLEAR_ERRORS,
-  UPDATE_USER,
-  ADD_USER
+  CLEAR_ERRORS
 } from "./types";
 import axios from "axios";
 
-// Add User
+// Add Fabricant User
 export const addUser = (id, userData) => async dispatch => {
   dispatch(clearErrors());
-  const newUser = await Promise.all([
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/users`, userData)
-  ]);
-
-  await axios
-    .post(
-      `${process.env.REACT_APP_BACKEND_URL}/users/${
-        newUser.data._id
-      }/manufacturers`,
-      { manufacturer_id: id }
-    )
-    .then(res =>
-      dispatch({
-        type: ADD_USER,
-        payload: res.data
-      })
-    )
+  axios
+    .post(`${process.env.REACT_APP_BACKEND_URL}/users`, userData)
+    .then((
+      res //res.data contains "token" and "user", the latter still isn't attributed a manufacturer
+    ) => {
+      axios
+        .post(
+          `${process.env.REACT_APP_BACKEND_URL}/users/${
+            res.data.user._id
+          }/manufacturers`,
+          { manufacturer_id: id }
+        )
+        .then((
+          res //res.data contains the user with the manufacturer attributed to it
+        ) => {
+          dispatch({
+            type: ADD_FABRICANT_USER,
+            payload: res.data
+          });
+        })
+        .catch(err =>
+          dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+          })
+        );
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -50,8 +60,8 @@ export const getUsers = id => dispatch => {
     )
     .catch(err =>
       dispatch({
-        type: GET_FABRICANT_USERS,
-        payload: null
+        type: GET_ERRORS,
+        payload: err.response.data
       })
     );
 };
@@ -62,7 +72,7 @@ export const updateUser = (id, userData) => dispatch => {
     .put(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${id}`, userData)
     .then(res =>
       dispatch({
-        type: UPDATE_USER,
+        type: UPDATE_FABRICANT_USER,
         payload: res.data
       })
     )
@@ -77,7 +87,10 @@ export const updateUser = (id, userData) => dispatch => {
 export const deleteUser = (id, userId) => dispatch => {
   axios
     .delete(
-      `${process.env.REACT_APP_BACKEND_URL}/${id}/manufacturers/${userId}`
+      `${
+        process.env.REACT_APP_BACKEND_URL
+      }/users/${userId}/manufacturers/${id}`,
+      { manufacturer_id: id }
     )
     .then(res =>
       dispatch({

@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { addUser, updateUser } from "../../actions/userAction";
+import { addUser, updateUser } from "../../actions/userActions";
 
 class UserModal extends Component {
   constructor(props) {
@@ -57,7 +57,7 @@ class UserModal extends Component {
     };
     if (this.state.type) {
       this.props.addUser(this.state.fabId, user);
-      console.log(id);
+      //A new user with an already used username won't be added, even if that user is previously deleted..
     } else {
       this.props.updateUser(id, user);
     }

@@ -58,7 +58,7 @@ function BrandRow(props) {
   const brand = props.brand,
     fab = fabricants.find(f => f.brands.find(b => b._id === brand._id)),
     fabName = fab ? fab.name : "";
-  //Get all old fabricants that were attributed to brand
+  //Get all old fabricants that were attributed to brand (Next time use filter method instead of map)
   let oldFabs = fabricants.map(f => {
     if (f.brands.find(b => b._id === brand._id)) return f;
     else return null;

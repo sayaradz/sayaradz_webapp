@@ -11,8 +11,30 @@ import {
 } from "reactstrap";
 import Spinner from "../common/Spinner";
 import UserModal from "./UserModal";
-import { getUsers, deleteUser } from "../../actions/userAction";
+import { getUsers, deleteUser } from "../../actions/userActions";
 import { connect } from "react-redux";
+import "react-notifications/lib/notifications.css";
+
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+
+const confirmDelete = props => {
+  const user = props.user;
+  confirmAlert({
+    title: "Confirmation",
+    message: "Etes-vous sure de vouloir supprimer cet utilisateur ?",
+    buttons: [
+      {
+        label: "Oui",
+        onClick: () => props.handleDelete(props.fabId, user._id)
+      },
+      {
+        label: "Non",
+        onClick: () => {}
+      }
+    ]
+  });
+};
 
 function UserRow(props) {
   const user = props.user;
@@ -31,7 +53,7 @@ function UserRow(props) {
         <Button
           className="mx-2"
           color="danger"
-          onClick={() => props.handleDelete(this.props.location.id, user._id)}
+          onClick={() => confirmDelete(props)}
         >
           <i className="fa fa-spinner fa-trash" />
         </Button>
@@ -84,6 +106,7 @@ class Users extends Component {
                         <UserRow
                           key={index}
                           user={user}
+                          fabId={this.props.location.id}
                           handleDelete={this.props.deleteUser}
                         />
                       ))}
@@ -102,7 +125,7 @@ class Users extends Component {
                   password: "",
                   picture: "",
                   role: "manufacturer",
-                  fabId: this.props.match.params.id
+                  fabId: this.props.location.id
                 }}
                 type={true}
                 btnColor="primary"

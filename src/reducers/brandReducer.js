@@ -1,8 +1,8 @@
 import {
-  ADD_VERSION,
   GET_BRANDS,
-  GET_MODEL,
-  UPDATE_MODEL,
+  GET_BRAND,
+  ADD_BRAND,
+  UPDATE_BRAND,
   DELETE_BRAND,
   MODEL_LOADING
 } from "../actions/types";
@@ -30,13 +30,13 @@ export default function(state = initialState, action) {
         brands: action.payload,
         loading: false
       };
-    case GET_MODEL:
+    case GET_BRAND:
       return {
         ...state,
         brand: action.payload,
         loading: false
       };
-    case UPDATE_MODEL:
+    case UPDATE_BRAND:
       NotificationManager.success(
         "Mise à jour éffectuée avec succés",
         "Mise à jour"
@@ -48,11 +48,9 @@ export default function(state = initialState, action) {
             if (b._id === action.payload._id) return action.payload;
             else return b;
           })
-          // action.payload,
-          // ...state.brands.filter(brand => brand._id !== action.payload._id)
         ]
       };
-    case ADD_VERSION:
+    case ADD_BRAND:
       NotificationManager.success("Ajout éffectué avec succés", "Ajout");
       return {
         ...state,

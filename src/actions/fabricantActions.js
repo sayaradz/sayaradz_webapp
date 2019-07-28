@@ -1,16 +1,14 @@
 import axios from "axios";
 
 import {
-  ADD_USER,
-  UPDATE_USER,
+  ADD_FABRICANT,
+  UPDATE_FABRICANT,
+  GET_FABRICANTS,
+  GET_FABRICANT,
+  DELETE_FABRICANT,
   GET_ERRORS,
   CLEAR_ERRORS,
-  GET_USERS,
-  GET_USER,
-  DELETE_USER,
-  USER_LOADING,
-  ADD_FAB_BRAND,
-  DELETE_FAB_BRAND
+  USER_LOADING
 } from "./types";
 
 // Add Fabricant
@@ -20,7 +18,7 @@ export const addFabricant = fabData => dispatch => {
     .post(`${process.env.REACT_APP_BACKEND_URL}/manufacturers`, fabData)
     .then(res =>
       dispatch({
-        type: ADD_USER,
+        type: ADD_FABRICANT,
         payload: res.data
       })
     )
@@ -39,7 +37,7 @@ export const updateFabricant = (id, fabData) => dispatch => {
     .put(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${id}`, fabData)
     .then(res =>
       dispatch({
-        type: UPDATE_USER,
+        type: UPDATE_FABRICANT,
         payload: res.data
       })
     )
@@ -53,19 +51,18 @@ export const updateFabricant = (id, fabData) => dispatch => {
 // Get Fabricants
 export const getFabricants = () => dispatch => {
   dispatch(setFabricantLoading());
-  console.log("I just got call yo !");
   axios
     .get(`${process.env.REACT_APP_BACKEND_URL}/manufacturers`)
     .then(res =>
       dispatch({
-        type: GET_USERS,
+        type: GET_FABRICANTS,
         payload: res.data.rows
       })
     )
     .catch(err =>
       dispatch({
-        type: GET_USERS,
-        payload: null
+        type: GET_ERRORS,
+        payload: err.response.data
       })
     );
 };
@@ -77,14 +74,14 @@ export const getFabricant = id => dispatch => {
     .get(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${id}`)
     .then(res =>
       dispatch({
-        type: GET_USER,
+        type: GET_FABRICANT,
         payload: res.data
       })
     )
     .catch(err =>
       dispatch({
-        type: GET_USER,
-        payload: null
+        type: GET_ERRORS,
+        payload: err.response.data
       })
     );
 };
@@ -95,7 +92,7 @@ export const deleteFabricant = id => dispatch => {
     .delete(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${id}`)
     .then(res =>
       dispatch({
-        type: DELETE_USER,
+        type: DELETE_FABRICANT,
         payload: id
       })
     )
