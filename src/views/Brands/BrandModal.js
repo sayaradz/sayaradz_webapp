@@ -172,8 +172,6 @@ BrandModal.propTypes = {
   addBrand: PropTypes.func.isRequired,
   updateBrand: PropTypes.func.isRequired,
   getFabricants: PropTypes.func.isRequired,
-  addFabBrand: PropTypes.func.isRequired,
-  deleteFabBrand: PropTypes.func.isRequired,
   fabricant: PropTypes.object.isRequired
 };
 

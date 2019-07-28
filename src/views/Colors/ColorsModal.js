@@ -80,7 +80,7 @@ class ColorsModal extends Component {
               <FormGroup>
                 <Label htmlFor="value">Couleur</Label>
                 <Input
-                  type="text"
+                  type="color"
                   id="value"
                   name="value"
                   value={this.state.value}

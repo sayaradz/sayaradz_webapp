@@ -21,15 +21,42 @@ const style = {
 };
 
 class Colors extends Component {
+  handleDelete(props, color) {
+    confirmAlert({
+      title: "Confirmation",
+      message: "Etes-vous sure de vouloir supprimer cette couleur ?",
+      buttons: [
+        {
+          label: "Oui",
+          onClick: () => props.deleteColor(color._id)
+        },
+        {
+          label: "Non",
+          onClick: () => {}
+        }
+      ]
+    });
+  }
+
   componentDidMount() {
     this.props.getColors();
   }
+
   columns = [
     {
       dataField: "value",
       text: "Couleur",
       formatter: (cell, row) => (
-        <img width="75px" height="75px" src={cell} alt={row.name} />
+        <div
+          width="75px"
+          height="75px"
+          style={{
+            backgroundColor: cell,
+            height: "70px",
+            width: "70px",
+            margin: "auto"
+          }}
+        />
       )
     },
     {
@@ -49,24 +76,6 @@ class Colors extends Component {
     }
   ];
 
-  handleDelete(props, color) {
-    console.log(props);
-    confirmAlert({
-      title: "Confirmation",
-      message: "Etes-vous sure de vouloir supprimer cette couleur ?",
-      buttons: [
-        {
-          label: "Oui",
-          onClick: () => props.deleteColor(color._id)
-        },
-        {
-          label: "Non",
-          onClick: () => {}
-        }
-      ]
-    });
-  }
-
   operationFormatter(cell, row, index, extra) {
     return (
       <div style={{ display: "flex", justifyContent: "center" }}>
@@ -82,6 +91,7 @@ class Colors extends Component {
           type={false}
           name={row.name}
           code={row.code}
+          value={row.value}
           btnColor="warning"
           btnText="&#9998;"
         />
@@ -155,6 +165,7 @@ class Colors extends Component {
                     name=""
                     code=""
                     logo=""
+                    value=""
                     type={true}
                     btnColor="primary"
                     btnText="Ajouter"

@@ -21,19 +21,7 @@ import "react-notifications/lib/notifications.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
-import { ADD_VERSION } from "../../actions/types";
-import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import filterFactory from "react-bootstrap-table2-filter";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-
 import { UPDATE_BRAND, ADD_BRAND } from "../../actions/types";
-
-const { SearchBar } = Search;
-
-const style = {
-  overflowX: "scroll"
-};
 
 const handleDelete = (props, brand, oldFabs) => {
   confirmAlert({
