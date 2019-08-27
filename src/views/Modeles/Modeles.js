@@ -49,7 +49,8 @@ class Modeles extends Component {
     }
   ];
   componentDidMount() {
-    this.props.getBrand("5d0e64dd6c5d750017f46454");
+    // this.props.getBrand("5d0e64dd6c5d750017f46454");
+    this.props.getModels(this.props.auth.user.manufacturers_access[0]);
   }
 
   operationFormatter(cell, row, index, extra) {
@@ -93,7 +94,6 @@ class Modeles extends Component {
 
   handleOnSelect = (row, isSelect) => {
     this.props.setCurrentModel(row._id);
-    console.log(row);
   };
 
   render() {
@@ -241,11 +241,13 @@ Modeles.propTypes = {
   getBrand: PropTypes.func.isRequired,
   deleteModel: PropTypes.func.isRequired,
   setCurrentModel: PropTypes.func.isRequired,
-  model: PropTypes.object
+  model: PropTypes.object,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  model: state.model
+  model: state.model,
+  auth: state.auth
 });
 
 export { Modeles };

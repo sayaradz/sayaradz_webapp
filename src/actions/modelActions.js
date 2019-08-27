@@ -12,21 +12,28 @@ import {
 } from "./types";
 
 // Get Modeles
-export const getModels = () => dispatch => {
+export const getModels = fabId => dispatch => {
   dispatch(setModelLoading());
-
+  // manufacturer => get brands
   axios
-    .get(`${process.env.REACT_APP_BACKEND_URL}/models`)
+    .get(`${process.env.REACT_APP_BACKEND_URL}/manufacturers/${fabId}`)
     .then(res =>
-      dispatch({
-        type: GET_MODELS,
-        payload: res.data.rows
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_MODELS,
-        payload: null
+      // brand => get models
+      res.data.brands.forEach(b => {
+        axios
+          .get(`${process.env.REACT_APP_BACKEND_URL}/brands/${b._id}`)
+          .then(res =>
+            dispatch({
+              type: GET_MODELS,
+              payload: res.data.models
+            })
+          )
+          .catch(err =>
+            dispatch({
+              type: GET_ERRORS,
+              payload: err
+            })
+          );
       })
     );
 };
@@ -38,7 +45,6 @@ export const getBrand = marqueId => dispatch => {
   axios
     .get(`${process.env.REACT_APP_BACKEND_URL}/brands/${marqueId}`)
     .then(res => {
-      console.log("get brands:", res.data);
       dispatch({
         type: GET_MODELS,
         payload: res.data
@@ -60,9 +66,7 @@ export const addModel = modelData => dispatch => {
     .then(res => {
       console.log(res);
       axios.post(
-        `${
-          process.env.REACT_APP_BACKEND_URL
-        }/brands/5d0e64dd6c5d750017f46454/models`,
+        `${process.env.REACT_APP_BACKEND_URL}/brands/5d0e64dd6c5d750017f46454/models`,
         { model_id: res.data._id }
       );
       dispatch({
@@ -86,17 +90,13 @@ export const addVersion = versionData => dispatch => {
     .then(res => {
       axios
         .post(
-          `${process.env.REACT_APP_BACKEND_URL}/models/${
-            versionData.modelId
-          }/versions`,
+          `${process.env.REACT_APP_BACKEND_URL}/models/${versionData.modelId}/versions`,
           { version_id: res.data._id }
         )
         .then(res => {
           axios
             .get(
-              `${process.env.REACT_APP_BACKEND_URL}/models/${
-                versionData.modelId
-              }`
+              `${process.env.REACT_APP_BACKEND_URL}/models/${versionData.modelId}`
             )
             .then(res => {
               dispatch({

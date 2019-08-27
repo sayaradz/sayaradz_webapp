@@ -5,7 +5,8 @@ import {
   GET_MODEL,
   UPDATE_MODEL,
   MODEL_LOADING,
-  DELETE_MODEL, SET_CURRENT_MODEL
+  DELETE_MODEL,
+  SET_CURRENT_MODEL
 } from "../actions/types";
 import {
   //NotificationContainer,
@@ -30,8 +31,7 @@ export default function(state = initialState, action) {
     case GET_MODELS:
       return {
         ...state,
-        models: action.payload.models,
-        brand: action.payload,
+        models: action.payload,
         loading: false
       };
     case GET_MODEL:
