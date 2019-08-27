@@ -24,7 +24,7 @@ export default {
     },
     {
       name: "Modèles",
-      url: "/brands/5d0e64dd6c5d750017f46454/models",
+      url: "/models",
       icon: "icon-pencil"
     }
     // {

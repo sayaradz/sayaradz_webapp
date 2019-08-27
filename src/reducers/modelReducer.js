@@ -2,6 +2,7 @@ import {
   ADD_VERSION,
   ADD_MODEL,
   GET_MODELS,
+  GET_FAB_BRANDS,
   GET_MODEL,
   UPDATE_MODEL,
   MODEL_LOADING,
@@ -18,7 +19,7 @@ const initialState = {
   model: {},
   current_model: {},
   loading: false,
-  brand: {}
+  brands: []
 };
 
 export default function(state = initialState, action) {
@@ -31,7 +32,15 @@ export default function(state = initialState, action) {
     case GET_MODELS:
       return {
         ...state,
-        models: action.payload,
+        models: state.models.filter(m => m._id === action.payload._id).length
+          ? state.models
+          : [action.payload, ...state.models],
+        loading: false
+      };
+    case GET_FAB_BRANDS:
+      return {
+        ...state,
+        brands: action.payload,
         loading: false
       };
     case GET_MODEL:
@@ -53,8 +62,10 @@ export default function(state = initialState, action) {
       return {
         ...state,
         models: [
-          action.payload,
-          ...state.models.filter(model => model._id !== action.payload._id)
+          ...state.models.map(b => {
+            if (b._id === action.payload._id) return action.payload;
+            else return b;
+          })
         ]
       };
     case ADD_MODEL:

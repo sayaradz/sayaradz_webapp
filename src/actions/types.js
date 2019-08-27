@@ -32,6 +32,7 @@ export const UPDATE_MODEL = "UPDATE_MODEL";
 export const MODEL_LOADING = "MODEL_LOADING";
 
 export const GET_MODELS = "GET_MODELS";
+export const GET_FAB_BRANDS = "GET_FAB_BRANDS";
 export const DELETE_MODEL = "DELETE_MODEL";
 export const SET_CURRENT_MODEL = "SET_CURRENT_MODEL";
 
