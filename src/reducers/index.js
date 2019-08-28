@@ -7,6 +7,7 @@ import brandReducer from "./brandReducer";
 import modelReducer from "./modelReducer";
 import colorReducer from "./colorReducer";
 import optionReducer from "./optionReducer";
+import allUsersReducer from "./allUsersReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
   brand: brandReducer,
   color: colorReducer,
   option: optionReducer,
-  model: modelReducer
+  model: modelReducer,
+  allUsers: allUsersReducer
 });

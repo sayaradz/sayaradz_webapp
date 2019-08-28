@@ -4,6 +4,7 @@ import DefaultLayout from "./containers/DefaultLayout";
 // admin components
 const Dashboard = React.lazy(() => import("./views/Dashboard"));
 const Users = React.lazy(() => import("./views/Users/Users"));
+const AllUsers = React.lazy(() => import("./views/AllUsers/AllUsers"));
 const Fabricants = React.lazy(() => import("./views/Fabricants/Fabricants"));
 const Brands = React.lazy(() => import("./views/Brands/Brands"));
 const User = React.lazy(() => import("./views/Users/User"));
@@ -15,6 +16,7 @@ const manufacturer_Dashboard = React.lazy(() =>
 const Colors = React.lazy(() => import("./views/Colors/Colors"));
 const Options = React.lazy(() => import("./views/Options/Options"));
 const Models = React.lazy(() => import("./views/Modeles/Modeles"));
+const Stock = React.lazy(() => import("./views/Stock/Stock"));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
@@ -59,26 +61,33 @@ const routes = [
     roles: ["admin"]
   },
   {
+    path: "/users",
+    exact: true,
+    name: "Utilisateurs",
+    component: AllUsers,
+    roles: ["admin"]
+  },
+  {
     path: "/fabricants",
     exact: true,
     name: "Fabricants",
     component: Fabricants,
     roles: ["admin"]
   },
-  {
-    path: "/users/:id",
-    exact: true,
-    name: "User Details",
-    component: User,
-    roles: ["admin"]
-  },
-  {
-    path: "/users",
-    exact: true,
-    name: "Users",
-    component: Users,
-    roles: ["admin"]
-  },
+  // {
+  //   path: "/users/:id",
+  //   exact: true,
+  //   name: "User Details",
+  //   component: User,
+  //   roles: ["admin"]
+  // },
+  // {
+  //   path: "/users",
+  //   exact: true,
+  //   name: "Users",
+  //   component: Users,
+  //   roles: ["admin"]
+  // },
 
   {
     path: "/brands",
@@ -122,6 +131,13 @@ const routes = [
     exact: true,
     name: "Manufacturer models",
     component: Models,
+    roles: ["manufacturer"]
+  },
+  {
+    path: "/stock",
+    exact: true,
+    name: "Manufacturer stock",
+    component: Stock,
     roles: ["manufacturer"]
   }
 ];

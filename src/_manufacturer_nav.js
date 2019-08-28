@@ -28,8 +28,8 @@ export default {
       icon: "icon-pencil"
     }
     // {
-    //   name: "Utilisateurs",
-    //   url: "/users",
+    //   name: "Stock",
+    //   url: "/stock",
     //   icon: "icon-pencil"
     // }
   ]
