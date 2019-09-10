@@ -48,3 +48,8 @@ export const ADD_OPTION = "ADD_OPTION";
 export const UPDATE_OPTION = "UPDATE_OPTION";
 export const DELETE_OPTION = "DELETE_OPTION";
 export const OPTION_LOADING = "OPTION_LOADING";
+
+export const GET_ORDERS = "GET_ORDERS";
+export const ACCEPT_ORDER = "ACCEPT_ORDER";
+export const REJECT_ORDER = "REJECT_ORDER";
+export const ORDER_LOADING = "ORDER_LOADING";

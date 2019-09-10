@@ -26,6 +26,11 @@ export default {
       name: "Modèles",
       url: "/brands/5d0e64dd6c5d750017f46454/models",
       icon: "icon-pencil"
+    },
+    {
+      name: "Commandes",
+      url: "/commandes",
+      icon: "icon-pencil"
     }
     // {
     //   name: "Utilisateurs",

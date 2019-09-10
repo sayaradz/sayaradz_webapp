@@ -61,7 +61,7 @@ class DefaultHeader extends Component {
             </NavLink>
           </NavItem> */}
           <AppHeaderDropdown direction="down">
-            <DropdownToggle nav>
+            <DropdownToggle nav >
               <img
                 src={"../../assets/img/avatars/9.jpg"}
                 className="img-avatar"
@@ -122,7 +122,7 @@ class DefaultHeader extends Component {
   }
 }
 
-DefaultHeader.propTypes = propTypes;
-DefaultHeader.defaultProps = defaultProps;
+//DefaultHeader.propTypes = propTypes;
+//DefaultHeader.defaultProps = defaultProps;
 
 export default DefaultHeader;
