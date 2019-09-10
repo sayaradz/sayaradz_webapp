@@ -6,6 +6,7 @@ export const GET_USERS = "GET_USERS";
 export const GET_USER = "GET_USER";
 export const ADD_USER = "ADD_USER";
 export const UPDATE_USER = "UPDATE_USER";
+export const UPDATE_USER_STATUS = "UPDATE_USER_STATUS";
 export const DELETE_USER = "DELETE_USER";
 export const USER_LOADING = "USER_LOADING";
 
@@ -49,3 +50,8 @@ export const ADD_OPTION = "ADD_OPTION";
 export const UPDATE_OPTION = "UPDATE_OPTION";
 export const DELETE_OPTION = "DELETE_OPTION";
 export const OPTION_LOADING = "OPTION_LOADING";
+
+export const GET_ORDERS = "GET_ORDERS";
+export const ACCEPT_ORDER = "ACCEPT_ORDER";
+export const REJECT_ORDER = "REJECT_ORDER";
+export const ORDER_LOADING = "ORDER_LOADING";

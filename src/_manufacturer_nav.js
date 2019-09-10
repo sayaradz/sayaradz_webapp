@@ -26,10 +26,15 @@ export default {
       name: "Modèles",
       url: "/models",
       icon: "icon-pencil"
+    },
+    {
+      name: "Commandes",
+      url: "/commandes",
+      icon: "icon-pencil"
     }
     // {
-    //   name: "Utilisateurs",
-    //   url: "/users",
+    //   name: "Stock",
+    //   url: "/stock",
     //   icon: "icon-pencil"
     // }
   ]

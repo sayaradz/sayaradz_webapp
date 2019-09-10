@@ -21,11 +21,11 @@ export default {
       name: "Marques",
       url: "/brands",
       icon: "icon-pencil"
+    },
+    {
+      name: "Utilisateurs",
+      url: "/users",
+      icon: "icon-pencil"
     }
-    // {
-    //   name: "Utilisateurs",
-    //   url: "/users",
-    //   icon: "icon-pencil"
-    // }
   ]
 };

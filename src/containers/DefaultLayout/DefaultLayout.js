@@ -51,7 +51,7 @@ class DefaultLayout extends Component {
     this.props.history.push("/login");
   }
 
-  componentWillMount = () => {
+  UNSAFE_componentWillMount = () => {
     // SET NAVIGATION ACCORDING TO USER ROLE
     if (this.props.auth.user.role === "admin") {
       navigation = admin_navigation;
@@ -67,7 +67,8 @@ class DefaultLayout extends Component {
       <div className="app">
         <AppHeader fixed>
           <Suspense fallback={this.loading()}>
-            <DefaultHeader onLogout={e => this.signOut(e)} />
+            {/*<DefaultHeader onLogout={e => this.signOut(e)} />*/}
+            {/* <DefaultHeader onLogout={e => this.signOut(e)} /> */}
           </Suspense>
         </AppHeader>
         <div className="app-body">

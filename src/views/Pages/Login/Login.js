@@ -37,7 +37,7 @@ class Login extends Component {
       this.props.history.push(getFallbackPage(this.props.auth.user.role));
     }
   }
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     // user is correctly authenticated => redirect user to fallback page
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push(getFallbackPage(nextProps.auth.user.role));
