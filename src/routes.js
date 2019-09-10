@@ -11,7 +11,7 @@ const User = React.lazy(() => import("./views/Users/User"));
 
 // manufacturer components
 const manufacturer_Dashboard = React.lazy(() =>
-  import("./views/Dashboard/ManufacturerDashboard")
+  import("./views/Dashboard/Dashboard")
 );
 const Colors = React.lazy(() => import("./views/Colors/Colors"));
 const Options = React.lazy(() => import("./views/Options/Options"));
