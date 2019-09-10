@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { DropdownItem, DropdownMenu, DropdownToggle, Nav } from "reactstrap";
+import { DropdownItem, DropdownMenu, DropdownToggle, Nav, Badge, Dropdown } from "reactstrap";
 import PropTypes from "prop-types";
 
 import {
@@ -14,9 +14,20 @@ const propTypes = {
   children: PropTypes.node
 };
 
-const defaultProps = {};
 
 class DefaultHeader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dropdownOpen: false
+    };
+  }
+
+  toggle = () => {
+    this.setState(prevState => ({
+      dropdownOpen: !prevState.dropdownOpen
+    }));
+  }
   render() {
     // eslint-disable-next-line
     const { children, ...attributes } = this.props;
@@ -61,6 +72,9 @@ class DefaultHeader extends Component {
             </NavLink>
           </NavItem> */}
           <AppHeaderDropdown direction="down">
+            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+
+            
             <DropdownToggle nav >
               <img
                 src={"../../assets/img/avatars/9.jpg"}
@@ -69,7 +83,7 @@ class DefaultHeader extends Component {
               />
             </DropdownToggle>
             <DropdownMenu right style={{ right: "auto" }}>
-              {/* <DropdownItem header tag="div" className="text-center">
+              <DropdownItem header tag="div" className="text-center">
                 <strong>Account</strong>
               </DropdownItem>
               <DropdownItem>
@@ -108,11 +122,12 @@ class DefaultHeader extends Component {
               <DropdownItem divider />
               <DropdownItem>
                 <i className="fa fa-shield" /> Lock Account
-              </DropdownItem> */}
+              </DropdownItem>
               <DropdownItem onClick={e => this.props.onLogout(e)}>
                 <i className="fa fa-lock" /> Logout
               </DropdownItem>
             </DropdownMenu>
+            </Dropdown>
           </AppHeaderDropdown>
         </Nav>
         {/* <AppAsideToggler className="d-md-down-none" />
