@@ -40,7 +40,8 @@ export const getOrders = () => dispatch => {
             color: (order.color !== null && order.color !== undefined)? order.color.value: "No Color Found",
             order_date: order.order_date,
             amount: order.amount,
-            status: order.order_status
+            status: order.order_status,
+            user: order.user
           })
         })
         return dispatch({

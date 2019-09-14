@@ -9,6 +9,7 @@ import Spinner from "../common/Spinner";
 
 
 import { getOrders, acceptOrder, rejectOrder } from '../../actions/commandesActions';
+import InfoModal from './InfoModal';
 
 const { SearchBar } = Search;
 const style = {
@@ -51,6 +52,7 @@ class Commandes extends Component {
         this.props.rejectOrder(row._id)
     }
     operationFormatter(cell, row, index, extra) {
+        if(row.status === "PENDING"){
         return (
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
@@ -67,8 +69,16 @@ class Commandes extends Component {
                 >
                     Rejeter
                 </Button>
+                <InfoModal row ={row}/>
             </div>
-        );
+        );}
+        else{
+            return (
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                <InfoModal row ={row}/>
+                </div>
+            )
+        }
     }
 
     componentDidMount() {
@@ -76,7 +86,6 @@ class Commandes extends Component {
     }
 
     render() {
-        console.log('rendering: ', this.props.order)
         const { orders, loading } = this.props.order
 
         return (

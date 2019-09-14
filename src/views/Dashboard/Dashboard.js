@@ -29,13 +29,16 @@ class Dashboard extends Component {
   componentDidMount() {
     this.props.getFabricants();
     this.props.getBrands();
+    
   }
 
   render() {
     const fabricantsNumber = this.props.fabricant.fabricants.length;
     const brandsNumber = this.props.brand.brands.length;
+    const user = this.props.auth.user
     return (
       <div className="animated fadeIn">
+        <h1>{user.name}</h1>
         <Row>
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-info">
@@ -81,7 +84,8 @@ Dashboard.propTypes = {
 
 const mapStateToProps = state => ({
   fabricant: state.fabricant,
-  brand: state.brand
+  brand: state.brand,
+  auth: state.auth
 });
 
 export default connect(
