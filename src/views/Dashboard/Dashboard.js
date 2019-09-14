@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Line } from "react-chartjs-2";
-import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
-import { CustomTooltips } from "@coreui/coreui-plugin-chartjs-custom-tooltips";
+import { Card, CardBody, Col, Row } from "reactstrap";
 import { getFabricants } from "../../actions/fabricantActions";
 import { getBrands } from "../../actions/brandActions";
 import { connect } from "react-redux";
