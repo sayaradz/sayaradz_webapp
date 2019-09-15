@@ -5,6 +5,7 @@ import {
   VERSION_LOADING,
   GET_VERSIONS,
   GET_VERSION,
+  DELETE_VERSION,
   CLEAR_ERRORS,
   GET_ERRORS
 } from "./types";
@@ -63,6 +64,37 @@ export const addVersion = versionData => dispatch => {
     });
 };
 
+// Delete Version
+export const deleteVersion = ids => dispatch => {
+  axios
+    .delete(
+      `${process.env.REACT_APP_BACKEND_URL}/models/${ids.modelId}/versions/${ids.versionId}`
+    )
+    .then(() => {
+      axios
+        .delete(
+          `${process.env.REACT_APP_BACKEND_URL}/versions/${ids.versionId}`
+        )
+        .then(res =>
+          dispatch({
+            type: DELETE_VERSION,
+            payload: ids.versionId
+          })
+        )
+        .catch(err =>
+          dispatch({
+            type: GET_ERRORS,
+            payload: err.response.data
+          })
+        );
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
 // Clear errors
 export const clearErrors = () => {
   return {

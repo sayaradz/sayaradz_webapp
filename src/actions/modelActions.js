@@ -190,20 +190,6 @@ export const addVersion = versionData => dispatch => {
             });
         });
     });
-  /*axios
-    .post(`${process.env.REACT_APP_BACKEND_URL}/models/:modelId/versions`, versionData)
-    .then(res =>
-      dispatch({
-        type: ADD_VERSION,
-        payload: res.data
-      })
-    )
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );*/
 };
 
 // Delete Model

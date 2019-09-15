@@ -13,8 +13,12 @@ import Spinner from "../common/Spinner";
 import { connect } from "react-redux";
 import "react-notifications/lib/notifications.css";
 import PropTypes from "prop-types";
-import { getVersions, getVersion } from "../../actions/versionActions";
-// import { confirmAlert } from "react-confirm-alert";
+import {
+  getVersions,
+  getVersion,
+  deleteVersion
+} from "../../actions/versionActions";
+import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { ADD_VERSION, UPDATE_VERSION } from "../../actions/types";
 import VersionModal from "./VersionModal";
@@ -31,7 +35,23 @@ function getChildren(row) {
   }
   return children;
 }
-
+const confirmDelete = (handleDelete, versionId, modelId) => {
+  const ids = { versionId, modelId };
+  confirmAlert({
+    title: "Confirmation",
+    message: "Etes-vous sure de vouloir supprimer cette version ?",
+    buttons: [
+      {
+        label: "Oui",
+        onClick: () => handleDelete(ids)
+      },
+      {
+        label: "Non",
+        onClick: () => {}
+      }
+    ]
+  });
+};
 class Versions extends Component {
   componentDidMount() {
     const id = this.props.location.id;
@@ -84,6 +104,7 @@ class Versions extends Component {
                     </thead>
                     <tbody>
                       {versions.map(version => (
+                        /*********** VERSION ROW ************* */
                         <tr style={{ display: "contents" }}>
                           <td colSpan="4" style={{ display: "contents" }}>
                             <tr
@@ -109,6 +130,13 @@ class Versions extends Component {
                                 <Button
                                   className="float-left mr-1"
                                   color="danger"
+                                  onClick={() =>
+                                    confirmDelete(
+                                      this.props.deleteVersion,
+                                      version._id,
+                                      this.props.location.id
+                                    )
+                                  }
                                 >
                                   <i className="fa fa-spinner fa-trash" />
                                 </Button>
@@ -122,6 +150,7 @@ class Versions extends Component {
                                 />
                               </td>
                             </tr>
+                            {/* Hidden row */}
                             <div className="child" style={{ display: "none" }}>
                               <td colSpan="4">
                                 <b>Options:</b>
@@ -143,9 +172,12 @@ class Versions extends Component {
                                   ))}
                               </td>
                             </div>
+                            {/* Hidden row end */}
                           </td>
                         </tr>
-                      ))}
+                      ))
+                      /*********** VERSION ROW END ************* */
+                      }
                     </tbody>
                   </Table>
                 </CardBody>
@@ -176,6 +208,7 @@ class Versions extends Component {
 Versions.propTypes = {
   getVersions: PropTypes.func.isRequired,
   getVersion: PropTypes.func.isRequired,
+  deleteVersion: PropTypes.func.isRequired,
   version: PropTypes.object.isRequired
 };
 
@@ -185,5 +218,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getVersions, getVersion }
+  { getVersions, getVersion, deleteVersion }
 )(Versions);
