@@ -1,0 +1,17 @@
+.tog {
+  column-span: all;
+  display: table-cell;
+}
+#togg {
+  width: -moz-available;
+}
+.child {
+  display: none;
+}
+.badge {
+  font-size: 1.1em;
+  margin: 0 0 4px 10px;
+}
+.child > td {
+  padding-left: 40px;
+}

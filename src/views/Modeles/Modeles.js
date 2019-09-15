@@ -179,8 +179,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export { Modeles };
-
 export default connect(
   mapStateToProps,
   { getModels, deleteModel, setCurrentModel, getFabBrands }
