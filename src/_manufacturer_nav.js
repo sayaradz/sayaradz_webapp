@@ -10,7 +10,7 @@ export default {
     },
     {
       title: true,
-      name: "Gestion CRUD"
+      name: "Raccourcis"
     },
     {
       name: "Couleurs",
