@@ -20,6 +20,8 @@ if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken);
   // Decode token and get user info
   const decoded = jwt_decode(localStorage.jwtToken);
+
+  console.log(localStorage.jwtToken);
   // Set user and isAuthenticated
   store.dispatch(getUser(decoded.id));
 }

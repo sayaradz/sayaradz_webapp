@@ -9,6 +9,7 @@ import colorReducer from "./colorReducer";
 import optionReducer from "./optionReducer";
 import orderReducer from "./orderReducer";
 import allUsersReducer from "./allUsersReducer";
+import vehicleReducer from "./vehicleReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -21,4 +22,5 @@ export default combineReducers({
   model: modelReducer,
   order: orderReducer,
   allUsers: allUsersReducer,
+  vehicle: vehicleReducer
 });

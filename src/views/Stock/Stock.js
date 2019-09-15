@@ -1,147 +1,99 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Col,
-  Row,
-  Table
-} from "reactstrap";
+import { Button, Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 import Spinner from "../common/Spinner";
-import BrandModal from "../Brands/BrandModal.js";
-import { getBrands, deleteBrand } from "../../actions/brandActions";
-import { getFabricants } from "../../actions/fabricantActions";
+import {
+  getVehiclesByManufacturer,
+  addVehicle
+} from "../../actions/VehicleActions";
+import { NotificationManager } from "react-notifications";
+
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
+
 import "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css";
-
 import "react-notifications/lib/notifications.css";
-
-import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import csvToJson from "../../utils/csvTojson";
 
-import { UPDATE_BRAND, ADD_BRAND } from "../../actions/types";
-
-const handleDelete = (props, brand, oldFabs) => {
-  confirmAlert({
-    title: "Confirmation",
-    message: "Etes-vous sure de vouloir supprimer cette marque ?",
-    buttons: [
-      {
-        label: "Oui",
-        onClick: () => props.rowHandleDelete(brand._id, oldFabs)
-      },
-      {
-        label: "Non",
-        onClick: () => {}
-      }
-    ]
-  });
+const style = {
+  display: "flex",
+  justifyContent: "flex-end"
 };
 
-function BrandRow(props) {
-  let count = 0,
-    fabricants = props.fabricants;
-  const brand = props.brand,
-    fab = fabricants.find(f => f.brands.find(b => b._id === brand._id)),
-    fabName = fab ? fab.name : "";
-  //Get all old fabricants that were attributed to brand (Next time use filter method instead of map)
-  let oldFabs = fabricants.map(f => {
-    if (f.brands.find(b => b._id === brand._id)) return f;
-    else return null;
-  });
-  return (
-    <tr key={count++}>
-      <td>
-        <img alt="logo" src={brand.logo} style={{ width: 75, height: 75 }} />
-      </td>
-      <td>{brand.code}</td>
-      <td>{brand.name}</td>
-      <td>{fabName}</td>
-      <td style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Button
-          className="float-left mr-1"
-          color="danger"
-          onClick={() => handleDelete(props, brand, oldFabs)}
-        >
-          <i className="fa fa-spinner fa-trash" />
-        </Button>
-        <BrandModal
-          id={brand._id}
-          type={UPDATE_BRAND}
-          name={brand.name}
-          code={brand.code}
-          logo={brand.logo}
-          btnColor="warning"
-          btnText="&#9998;"
-        />
-      </td>
-    </tr>
-  );
-}
+const { SearchBar } = Search;
+
+let fileReader = null;
 
 class Stock extends Component {
+  state = {
+    inputFile: null
+  };
+
   columns = [
     {
-      dataField: "logo",
-      text: "Logo",
-      formatter: (cell, row) => (
-        <img width="75px" height="75px" src={cell} alt={row.name} />
-      )
+      dataField: "chassis_number",
+      text: "Chassis"
     },
     {
-      dataField: "code",
-      text: "Code"
+      dataField: "model",
+      text: "Modéle"
     },
     {
-      dataField: "name",
-      text: "Nom"
-    },
-    {
-      dataField: "fabricant",
-      text: "Fabricant"
-    },
-    {
-      dataField: "df1",
-      isDummyField: true,
-      text: "Opérations",
-      formatter: this.operationFormatter,
-      formatExtraData: this
+      dataField: "version",
+      text: "Version"
     }
+    // {
+    //   dataField: "qty",
+    //   text: "Quantité"
+    // }
   ];
+
   componentDidMount() {
-    this.props.getBrands();
-    this.props.getFabricants();
+    let id = this.props.auth.user.manufacturers_access[0];
+    console.log(this.props.auth.user);
+    this.props.getVehiclesByManufacturer(id);
   }
 
-  operationFormatter(cell, row, index, extra) {
-    return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Button
-          className="float-left mr-1"
-          color="danger"
-          onClick={() => extra.handleDelete(extra.props, row)}
-        >
-          <i className="fa fa-spinnerde fa-trash" />
-        </Button>
-        <BrandModal
-          id={row._id}
-          type={UPDATE_BRAND}
-          name={row.name}
-          code={row.code}
-          logo={row.logo}
-          btnColor="warning"
-          btnText="&#9998;"
-        />
-      </div>
-    );
-  }
+  triggerFileInput = () => {
+    this.inputFile.click();
+  };
+
+  handleFileRead = e => {
+    const data = fileReader.result;
+    const res = csvToJson(data, ["chassis_number", "model", "version"]);
+
+    // console.log("entered");
+
+    if (res.error) {
+      NotificationManager.error(
+        "Le format du fichier de stock choisi est incorrect",
+        "Stock"
+      );
+    } else {
+      let jsonData = res.data;
+      jsonData.map(d => {
+        d.chassis_number = parseInt(d.chassis_number);
+      });
+      // axios call
+      this.props.addVehicle(jsonData);
+      // console.log(jsonData);
+    }
+  };
+
+  uploadFile = e => {
+    const file = e.target.files[0];
+    fileReader = new FileReader();
+    fileReader.onloadend = this.handleFileRead;
+    fileReader.readAsText(file);
+  };
 
   render() {
-    const { brands, loading } = this.props.brand;
-    const { fabricants } = this.props.fabricant;
-    if (!brands || loading) {
+    const { vehicles, loading } = this.props.vehicle;
+    // console.log(vehicles);
+    if (!vehicles || loading) {
       return (
         <div className="animated fadeIn">
           <Row>
@@ -158,49 +110,51 @@ class Stock extends Component {
             <Col xl={12}>
               <Card>
                 <CardHeader>
-                  <i className="fa fa-align-justify" /> Marques
+                  <i className="fa fa-align-justify" /> Stock
                 </CardHeader>
                 <CardBody>
-                  <Table responsive hover>
-                    <thead>
-                      <tr>
-                        <th scope="col">Logo</th>
-                        <th scope="col">Code</th>
-                        <th scope="col">Nom</th>
-                        <th scope="col">Fabricant</th>
-                        <th scope="col" />
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {brands.map(brand => (
-                        <BrandRow
-                          key={brand._id}
-                          brand={brand}
-                          getFabricants={this.props.getFabricants}
-                          fabricants={fabricants}
-                          rowHandleDelete={this.props.deleteBrand}
+                  <ToolkitProvider
+                    keyField="_id"
+                    data={vehicles}
+                    columns={this.columns}
+                    search
+                  >
+                    {props => (
+                      <div>
+                        <hr />
+                        <h3>Rechercher un véhicule:</h3>
+                        <SearchBar {...props.searchProps} />
+                        <hr />
+                        <BootstrapTable
+                          {...props.baseProps}
+                          keyField="_id"
+                          columns={this.columns}
+                          data={vehicles}
+                          pagination={paginationFactory()}
+                          className="table-responsive"
+                          striped
+                          hover
+                          condensed
+                          responsive
                         />
-                      ))}
-                    </tbody>
-                  </Table>
+                      </div>
+                    )}
+                  </ToolkitProvider>
                 </CardBody>
               </Card>
               <Row>
-                <Col xl={12}>
-                  <BrandModal
-                    id=""
-                    type={ADD_BRAND}
-                    name=""
-                    code=""
-                    logo=""
-                    btnColor="primary"
-                    btnText="Ajouter"
+                <Col xl={12} style={style}>
+                  <input
+                    type="file"
+                    ref={input => (this.inputFile = input)}
+                    onChange={this.uploadFile}
+                    hidden
                   />
+                  <Button onClick={this.triggerFileInput} color="primary">
+                    Upload fichier de stock
+                  </Button>
                 </Col>
               </Row>
-
-              <br />
-              <br />
             </Col>
           </Row>
         </div>
@@ -210,21 +164,17 @@ class Stock extends Component {
 }
 
 Stock.propTypes = {
-  getBrands: PropTypes.func.isRequired,
-  deleteBrand: PropTypes.func.isRequired,
-  getFabricants: PropTypes.func.isRequired,
-  brand: PropTypes.object.isRequired,
-  fabricant: PropTypes.object.isRequired
+  getVehiclesByManufacturer: PropTypes.func.isRequired,
+  addVehicle: PropTypes.func.isRequired
+  //   allUsers: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  brand: state.brand,
-  fabricant: state.fabricant
+  vehicle: state.vehicle,
+  auth: state.auth
 });
-
-// export { Brands };
 
 export default connect(
   mapStateToProps,
-  { getBrands, deleteBrand, getFabricants }
+  { getVehiclesByManufacturer, addVehicle }
 )(Stock);

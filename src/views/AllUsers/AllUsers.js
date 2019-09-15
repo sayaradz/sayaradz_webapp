@@ -8,11 +8,7 @@ import { confirmAlert } from "react-confirm-alert";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import filterFactory, {
-  multiSelectFilter,
-  Comparator,
-  selectFilter
-} from "react-bootstrap-table2-filter";
+import filterFactory, { selectFilter } from "react-bootstrap-table2-filter";
 
 import "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css";
 import "react-notifications/lib/notifications.css";
@@ -138,7 +134,7 @@ class AllUsers extends Component {
             <Col xl={12}>
               <Card>
                 <CardHeader>
-                  <i className="fa fa-align-justify" /> Marques
+                  <i className="fa fa-align-justify" /> Utilisateurs
                 </CardHeader>
                 <CardBody style={style}>
                   <ToolkitProvider
