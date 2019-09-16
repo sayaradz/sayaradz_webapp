@@ -10,7 +10,7 @@ export default {
     },
     {
       title: true,
-      name: "Gestion CRUD"
+      name: "Raccourcis"
     },
     {
       name: "Couleurs",
@@ -31,11 +31,11 @@ export default {
       name: "Commandes",
       url: "/commandes",
       icon: "icon-pencil"
+    },
+    {
+      name: "Stock",
+      url: "/stock",
+      icon: "icon-pencil"
     }
-    // {
-    //   name: "Stock",
-    //   url: "/stock",
-    //   icon: "icon-pencil"
-    // }
   ]
 };

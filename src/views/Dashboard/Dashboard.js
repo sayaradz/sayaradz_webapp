@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Line } from "react-chartjs-2";
-import { Card, CardBody, CardTitle, Col, Row } from "reactstrap";
-import { CustomTooltips } from "@coreui/coreui-plugin-chartjs-custom-tooltips";
+import { Card, CardBody, Col, Row } from "reactstrap";
 import { getFabricants } from "../../actions/fabricantActions";
 import { getBrands } from "../../actions/brandActions";
 import { connect } from "react-redux";
@@ -31,13 +29,16 @@ class Dashboard extends Component {
   componentDidMount() {
     this.props.getFabricants();
     this.props.getBrands();
+    
   }
 
   render() {
     const fabricantsNumber = this.props.fabricant.fabricants.length;
     const brandsNumber = this.props.brand.brands.length;
+    const user = this.props.auth.user
     return (
       <div className="animated fadeIn">
+        <h1>{user.name}</h1>
         <Row>
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-info">
@@ -83,7 +84,8 @@ Dashboard.propTypes = {
 
 const mapStateToProps = state => ({
   fabricant: state.fabricant,
-  brand: state.brand
+  brand: state.brand,
+  auth: state.auth
 });
 
 export default connect(
