@@ -16,7 +16,6 @@ export const getVersions = id => dispatch => {
   axios
     .get(`${process.env.REACT_APP_BACKEND_URL}/models/${id}`)
     .then(res => {
-      console.log("got versions");
       dispatch({
         type: GET_VERSIONS,
         payload: res.data.versions
@@ -34,7 +33,6 @@ export const getVersion = id => dispatch => {
   axios
     .get(`${process.env.REACT_APP_BACKEND_URL}/versions/${id}`)
     .then(res => {
-      console.log("new version", res.data);
       dispatch({
         type: GET_VERSION,
         payload: res.data
@@ -46,22 +44,6 @@ export const getVersion = id => dispatch => {
         payload: err.response.data
       })
     );
-};
-// Add Versions
-export const addVersion = versionData => dispatch => {
-  dispatch(clearErrors());
-  axios
-    .post(`${process.env.REACT_APP_BACKEND_URL}/versions`, versionData.version)
-    .then(res => {
-      axios
-        .post(
-          `${process.env.REACT_APP_BACKEND_URL}/models/${versionData.modelId}/versions`,
-          { version_id: res.data._id }
-        )
-        .then(res => {
-          console.log(res);
-        });
-    });
 };
 
 // Delete Version
@@ -95,6 +77,58 @@ export const deleteVersion = ids => dispatch => {
       })
     );
 };
+export const addVersion = versionData => dispatch => {
+  dispatch(clearErrors());
+  dispatch({
+    type: ADD_VERSION,
+    payload: versionData
+  });
+};
+
+// Add Version
+export const addVersion0 = versionData => dispatch => {
+  dispatch(clearErrors());
+  axios
+    .post(`${process.env.REACT_APP_BACKEND_URL}/versions`, versionData.version)
+    .then(res => {
+      axios
+        .post(
+          `${process.env.REACT_APP_BACKEND_URL}/models/${versionData.modelId}/versions`,
+          { version_id: res.data._id }
+        )
+        .then(resu => {
+          versionData.options
+            .forEach(o => {
+              axios.post(
+                `${process.env.REACT_APP_BACKEND_URL}/versions/${res.data._id}/options`,
+                { option_id: o.value }
+              );
+            })
+            .then(resul => {
+              versionData.colors
+                .forEach(o => {
+                  axios.post(
+                    `${process.env.REACT_APP_BACKEND_URL}/versions/${res.data._id}/colors`,
+                    { color_id: o.value }
+                  );
+                })
+                .then(res => {
+                  axios
+                    .get(
+                      `${process.env.REACT_APP_BACKEND_URL}/models/${versionData.modelId}`
+                    )
+                    .then(res => {
+                      dispatch({
+                        type: ADD_VERSION,
+                        payload: res.data
+                      });
+                    });
+                });
+            });
+        });
+    });
+};
+
 // Clear errors
 export const clearErrors = () => {
   return {

@@ -23,6 +23,8 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import { ADD_VERSION, UPDATE_VERSION } from "../../actions/types";
 import VersionModal from "./VersionModal";
 import "./Versions.css";
+import { getColors } from "../../actions/colorActions";
+import { getOptions } from "../../actions/optionActions";
 
 function getChildren(row) {
   let children = [];
@@ -56,6 +58,8 @@ class Versions extends Component {
   componentDidMount() {
     const id = this.props.location.id;
     this.props.getVersions(id);
+    this.props.getColors();
+    this.props.getOptions();
   }
   childrenToggle(version, e) {
     this.props.getVersion(version._id);
@@ -71,8 +75,22 @@ class Versions extends Component {
     });
   }
   render() {
-    const { versions, loading } = this.props.version;
+    const { options } = this.props.option,
+      { colors } = this.props.color,
+      { versions, loading } = this.props.version;
     let ver = this.props.version.completeVersions;
+    let ops = [
+      ...this.props.option.options.map(o => ({
+        value: o._id,
+        label: o.name
+      }))
+    ];
+    let cls = [
+      ...this.props.color.colors.map(o => ({
+        value: o._id,
+        label: o.name
+      }))
+    ];
     if (!versions || loading) {
       return (
         <div className="animated fadeIn">
@@ -142,11 +160,18 @@ class Versions extends Component {
                                 </Button>
                                 <VersionModal
                                   id={version._id}
+                                  modelId={this.props.location.id}
                                   type={UPDATE_VERSION}
                                   name={version.name}
                                   code={version.code}
                                   btnColor="warning"
                                   btnText="&#9998;"
+                                  options={
+                                    ver.find(v => v._id === version._id).options
+                                  }
+                                  colors={
+                                    ver.find(v => v._id === version._id).colors
+                                  }
                                 />
                               </td>
                             </tr>
@@ -186,6 +211,7 @@ class Versions extends Component {
                 <Col xl={12}>
                   <VersionModal
                     id=""
+                    modelId={this.props.location.id}
                     type={ADD_VERSION}
                     name=""
                     code=""
@@ -209,14 +235,20 @@ Versions.propTypes = {
   getVersions: PropTypes.func.isRequired,
   getVersion: PropTypes.func.isRequired,
   deleteVersion: PropTypes.func.isRequired,
-  version: PropTypes.object.isRequired
+  version: PropTypes.object.isRequired,
+  getOptions: PropTypes.func.isRequired,
+  getColors: PropTypes.func.isRequired,
+  color: PropTypes.object.isRequired,
+  option: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  version: state.version
+  version: state.version,
+  option: state.option,
+  color: state.color
 });
 
 export default connect(
   mapStateToProps,
-  { getVersions, getVersion, deleteVersion }
+  { getVersions, getVersion, deleteVersion, getOptions, getColors }
 )(Versions);

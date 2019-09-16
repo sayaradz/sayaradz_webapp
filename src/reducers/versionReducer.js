@@ -16,6 +16,7 @@ import {
 const initialState = {
   versions: [],
   completeVersions: [],
+  version: {},
   loading: false
 };
 
@@ -40,6 +41,7 @@ export default function(state = initialState, action) {
     case GET_VERSION:
       return {
         ...state,
+        version: action.payload,
         completeVersions: [
           ...state.completeVersions.map(v => {
             if (v._id === action.payload._id) return action.payload;
@@ -66,7 +68,7 @@ export default function(state = initialState, action) {
       NotificationManager.success("Ajout éffectué avec succés", "Ajout");
       return {
         ...state,
-        versions: [action.payload, ...state.versions]
+        versions: [action.payload.version, ...state.versions]
       };
     case DELETE_VERSION:
       NotificationManager.success(
