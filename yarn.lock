@@ -2472,15 +2472,15 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-classnames@2.2.5:
-  version "2.2.5"
-  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
-  integrity sha1-+zgB1FNGdknvNgPH1hoCvRKb3m0=
-
 classnames@^2.1.1, classnames@^2.2.3, classnames@^2.2.6:
   version "2.2.6"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.6.tgz#43935bffdd291f326dad0a205309b38d00f650ce"
   integrity sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
+
+classnames@^2.2.5:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.1.tgz#dfcfa3891e306ec1dad105d0e88f4417b8535e8e"
+  integrity sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==
 
 clean-css@4.2.x:
   version "4.2.1"
@@ -8602,9 +8602,9 @@ querystring@0.2.0:
   integrity sha1-sgmEkgO7Jd+CDadW50cAWHhSFiA=
 
 querystringify@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
-  integrity sha512-w7fLxIRCRT7U8Qu53jQnJyPkYZIaR4n5151KMfcJlO/A9397Wxb1amJvROTK6TOnp7PfoAmg/qXiNHI+08jRfA==
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.2.0.tgz#3345941b4153cb9d082d8eee4cda2016a9aef7f6"
+  integrity sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==
 
 raf@3.4.1, raf@^3.4.0:
   version "3.4.1"
@@ -8686,29 +8686,29 @@ react-app-polyfill@^0.2.0:
     raf "3.4.1"
     whatwg-fetch "3.0.0"
 
-react-bootstrap-table-next@^3.1.4:
-  version "3.1.9"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-table-next/-/react-bootstrap-table-next-3.1.9.tgz#84b37000385d7b2bb17a4631950484b86511ba2a"
-  integrity sha512-aTj/LQtf/NdU2+J0rKAMcD95VJo6za5w1PWgovyd2djTEaPFzcmLcysbkMeU50f/fyeyOvv19MyBapPl5+ravw==
+react-bootstrap-table-next@^3.2.0:
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-table-next/-/react-bootstrap-table-next-3.3.5.tgz#fa1d6abe2d4530d59078810c334f40bdacf539c3"
+  integrity sha512-vBO+y2Y483Y1QnpxvgY8jTz6gwIPYpfc26AKZhwgESL6cpjhxSsoFGXNp3KKnT5krW5SF9zpcf/98jIJefv+RQ==
   dependencies:
-    classnames "2.2.5"
+    classnames "^2.2.5"
     react-transition-group "2.5.3"
     underscore "1.9.1"
 
-react-bootstrap-table2-filter@^1.1.9:
-  version "1.1.12"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-table2-filter/-/react-bootstrap-table2-filter-1.1.12.tgz#272d89a3c363a40742d05a458a66c2405f7e2ac0"
-  integrity sha512-I/j3/Myz2Xm8eLWrSyaX9xVHipfCNl9fWjrjMrqeVB/pynjwoOnUdXV1tEc1SUPfygnxSTf5V+4zzd1rav5p6A==
+react-bootstrap-table2-filter@^1.2.0:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-table2-filter/-/react-bootstrap-table2-filter-1.3.3.tgz#ba189d137a2200b89f046041d0f4f307ce700623"
+  integrity sha512-lE+CHHGewzN9PCPaRqbu9wia8NMfwOBMPOAoAyfxbbMrZzjCf1WYRrHbWGzUj1MQlF5kJxLMwRgy/C604OmgMw==
 
-react-bootstrap-table2-paginator@^2.0.6:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-table2-paginator/-/react-bootstrap-table2-paginator-2.0.8.tgz#49d628f181000cfca0574f69de1b4e15c02d0d4e"
-  integrity sha512-9cFBSs0IYMcLcdG3voGF8xcWVN/ePYuRzKZ4A2GAzl3jZF1FkR6ETNlAPQzkhhKo6rOpdsQ4oFmJxt1oV7h6UQ==
+react-bootstrap-table2-paginator@^2.1.0:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-table2-paginator/-/react-bootstrap-table2-paginator-2.1.2.tgz#a62151909e594719db568cede6e5d2962cbf8ddb"
+  integrity sha512-LC5znEphhgKJvaSY1q8d+Gj0Nc/1X+VS3tKJjkmWmfv9P61YC/BnwJ+aoqEmQzsLiVGowrzss+i/u+Tip5H+Iw==
 
-react-bootstrap-table2-toolkit@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/react-bootstrap-table2-toolkit/-/react-bootstrap-table2-toolkit-2.0.1.tgz#7098d4ee21fc524eb870bfe22426c199c8f63bec"
-  integrity sha512-r3C6KGT4MmI6lzd8APGOC18R81vy71gn1BIkoHL/9JrX8O501CZvxRqWBq58KiKS2EUdx245deDjSTnsA42OdA==
+react-bootstrap-table2-toolkit@^2.1.0:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-table2-toolkit/-/react-bootstrap-table2-toolkit-2.1.3.tgz#554df765c3a4ab9d650b6686f55a5256e2509fab"
+  integrity sha512-nKBSezHTOkO9k8YMMuJfPEZtBVfIYrJbmP8n3u7+AXRcOrOGygXyauNVKWqdKLchQlG/cW5QR0sPkFknpp5rjQ==
   dependencies:
     file-saver "2.0.2"
 
@@ -10639,9 +10639,9 @@ url-loader@1.1.1:
     schema-utils "^1.0.0"
 
 url-parse@^1.4.3:
-  version "1.4.7"
-  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.4.7.tgz#a8a83535e8c00a316e403a5db4ac1b9b853ae278"
-  integrity sha512-d3uaVyzDB9tQoSXFvuSUNFibTd9zxd2bkVrDRvF5TmvWWQwqE4lgYJ5m+x1DbecWkw+LK4RNl2CU1hHuOKPVlg==
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.1.tgz#d5fa9890af8a5e1f274a2c98376510f6425f6e3b"
+  integrity sha512-HOfCOUJt7iSYzEx/UqgtwKRMC6EU91NFhsCHMv9oM03VJcVo2Qrp8T8kI9D7amFf1cu+/3CEhgb3rF9zL7k85Q==
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
