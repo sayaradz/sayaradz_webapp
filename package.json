@@ -20,7 +20,7 @@
     "core-js": "^2.6.1",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "flag-icon-css": "^3.2.1",
     "font-awesome": "^4.7.0",
     "jwt-decode": "^2.2.0",
